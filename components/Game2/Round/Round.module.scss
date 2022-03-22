@@ -1,0 +1,27 @@
+.round {
+  font-family: var(--secondary-font);
+
+  text-align: center;
+}
+
+.title {
+  font-size: 36px;
+  color: var(--primary-light);
+  text-transform: uppercase;
+}
+
+.question {
+  font-size: 24px;
+}
+
+.message {
+  font-size: 30px;
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.success {
+  color: var(--success-color);
+}

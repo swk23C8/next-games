@@ -1,0 +1,17 @@
+.label {
+  padding: 10px;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--primary-light);
+  }
+}
+
+.separator {
+  margin-left: 10px;
+  margin-right: 10px;
+}
