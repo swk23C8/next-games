@@ -37,10 +37,10 @@ const Round = ({ setIsGameStarted }) => {
 		setShowCoinSideChoiceButtons(false);
 	};
 
-	const getCoinSpin = () => setDieRolled((state) => !state);
+	const getDieSpin = () => setDieRolled((state) => !state);
 
 	const makeCoinToss = () => {
-		getCoinSpin();
+		getDieSpin();
 		setDieRollCount((dieRollCount += 1));
 		if (coinSideSelection) setCoinSideSelection(null);
 		setCoinTossResult(coinToss());
