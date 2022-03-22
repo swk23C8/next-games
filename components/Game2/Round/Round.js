@@ -12,10 +12,12 @@ import styles from './Round.module.scss';
 const Round = ({ setIsGameStarted }) => {
 	const [isRoundStarted, setIsRoundStarted] = useState(true);
 	const [roundCount, setRoundCount] = useState(1);
-	const [coinTossCount, setCoinTossCount] = useState(0);
-	const [coinFlipped, setCoinFlipped] = useState(false);
-	const [showCoinTossChoiceButtons, setShowCoinTossChoiceButtons] =
+	const [dieRollCount, setDieRollCount] = useState(0);
+	const [dieRolled, setDieRolled] = useState(false);
+	const [showDieRollChoiceButtons, setShowDieRollChoiceButtons] =
 		useState(true);
+
+	// change this to show your dice value in cee-low or dice combination in liar's dice
 	const [showCoinSideChoiceButtons, setShowCoinSideChoiceButtons] =
 		useState(false);
 	const [coinSideSelection, setCoinSideSelection] = useState(null);
@@ -28,28 +30,28 @@ const Round = ({ setIsGameStarted }) => {
 		setShowRoundStatistic(false);
 		setIsRoundStarted(true);
 		setRoundCount((roundCount += 1));
-		setCoinTossCount(0);
+		setDieRollCount(0);
 		setPlayerWinsCount(0);
 		setCoinSideSelection(null);
-		setShowCoinTossChoiceButtons(true);
+		setShowDieRollChoiceButtons(true);
 		setShowCoinSideChoiceButtons(false);
 	};
 
-	const getCoinSpin = () => setCoinFlipped((state) => !state);
+	const getCoinSpin = () => setDieRolled((state) => !state);
 
 	const makeCoinToss = () => {
 		getCoinSpin();
-		setCoinTossCount((coinTossCount += 1));
+		setDieRollCount((dieRollCount += 1));
 		if (coinSideSelection) setCoinSideSelection(null);
 		setCoinTossResult(coinToss());
 	};
 
 	const finishRound = () => {
-		if (coinTossCount === 0 || showRoundStatistic) setIsGameStarted(false);
+		if (dieRollCount === 0 || showRoundStatistic) setIsGameStarted(false);
 
 		const newRoundStatistic = {
 			roundNumber: roundCount,
-			coinTossNumber: coinTossCount,
+			coinTossNumber: dieRollCount,
 			playerWinsCount,
 		};
 
@@ -62,10 +64,10 @@ const Round = ({ setIsGameStarted }) => {
 	};
 
 	useEffect(() => {
-		if (coinTossCount === MAX_COIN_TOSS_COUNT) finishRound();
+		if (dieRollCount === MAX_COIN_TOSS_COUNT) finishRound();
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [coinTossCount]);
+	}, [dieRollCount]);
 
 	const isPlayerGuessed = coinSideSelection === coinTossResult;
 
@@ -74,10 +76,10 @@ const Round = ({ setIsGameStarted }) => {
 		if (e.target.value === coinTossResult)
 			setPlayerWinsCount((playerWinsCount += 1));
 
-		setShowCoinTossChoiceButtons(true);
+		setShowDieRollChoiceButtons(true);
 		setShowCoinSideChoiceButtons(false);
 	};
-
+	console.log(coinTossResult);
 	console.log('coinSideSelection', coinSideSelection);
 
 	return (
@@ -89,10 +91,10 @@ const Round = ({ setIsGameStarted }) => {
 				{isRoundStarted ? (
 					<>
 						<Coin
-							coinFlipped={coinFlipped}
+							coinFlipped={dieRolled}
 							coinTossResult={coinTossResult}
 							coinSideSelection={coinSideSelection}
-							setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
+							setShowCoinTossChoiceButtons={setShowDieRollChoiceButtons}
 							setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
 						/>
 						<h2 className={styles.title}>Round {roundCount}</h2>
@@ -106,7 +108,7 @@ const Round = ({ setIsGameStarted }) => {
 								)}
 							</p>
 						)}
-						{showCoinTossChoiceButtons && (
+						{showDieRollChoiceButtons && (
 							<>
 								<p className={styles.question}>Are you ready to rumble ?</p>
 								<button type="button" onClick={makeCoinToss}>
