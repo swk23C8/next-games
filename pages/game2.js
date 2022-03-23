@@ -15,7 +15,8 @@ export default function Game2() {
         <meta name="description" content="Game page" />
       </Head>
       <div className='grid place-items-center h-screen bg-red-400'>
-        <PlayerCreation />
+        {/* <PlayerCreation /> */}
+        <GameBoard />
       </div>
     </>
   ) : (
