@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useContext } from 'react';
 import GameBoard from '../components/Game2/GameBoard/GameBoard';
 import PlayerCreation from '../components/Game2/PlayerCreation/PlayerCreation';
-import { Context } from '../components/Game2/Context/Context';
+import { Context } from '/Context';
 
 export default function Game2() {
   const { gameStarted } = useContext(Context);

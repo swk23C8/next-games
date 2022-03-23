@@ -2,7 +2,7 @@ import HoldOrContinue from '../HoldOrContinue/HoldOrContinue';
 import { Alert, Paper, Snackbar } from '@mui/material';
 import { useRef, useState, useEffect, useReducer, useContext } from 'react';
 import Dice from 'react-dice-roll';
-import { Context } from '../Context/Context';
+import { Context } from '/Context';
 import EndGame from '../EndGame/EndGame';
 
 const diceReducer = (state, action) => {

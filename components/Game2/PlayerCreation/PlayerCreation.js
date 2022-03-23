@@ -1,7 +1,7 @@
 // FIXME Add textfield errors
 import { TextField, Paper } from '@mui/material';
 import { useContext, useState } from 'react';
-import { Context } from '../Context/Context';
+import { Context } from '/Context';
 
 export default function PlayerCreation() {
 	const { setGameStarted, playerOne, setPlayerOne, playerTwo, setPlayerTwo } =
