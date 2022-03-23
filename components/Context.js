@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-const Context = createContext({});
+const Context = createContext("");
 
 function ContextProvider({ children }) {
 	const [gameStarted, setGameStarted] = useState(false);
@@ -12,7 +12,6 @@ function ContextProvider({ children }) {
 			value={{
 				gameStarted,
 				setGameStarted,
-
 				playerOne,
 				setPlayerOne,
 				playerTwo,

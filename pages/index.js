@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import HomePage from '../components/HomePage/HomePage';
+import { Paper } from '@mui/material';
+import { useRouter } from 'next/router';
+
 
 
 const Home = () => {

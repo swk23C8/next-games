@@ -1,17 +1,22 @@
 // FIXME Add textfield errors
 import { TextField, Paper } from '@mui/material';
 import { useContext, useState } from 'react';
-import { Context } from '/Context';
+import { Context } from '../../Context';
+
 
 export default function PlayerCreation() {
+
 	const { setGameStarted, playerOne, setPlayerOne, playerTwo, setPlayerTwo } =
 		useContext(Context);
 
 	const startGame = () => {
 		playerOne && playerTwo && setGameStarted(true);
 	};
+	console.log(playerTwo)
+	console.log(playerOne)
 
 	return (
+
 		<Paper elevation={4} className='p-7'>
 			<p className='mb-4 text-center'>You Will Need 2 Players!</p>
 			<form
