@@ -29,7 +29,7 @@ const HomePage = () => {
             <h1 className='text-4xl font-bold'>Pig</h1>
             <button
               className='text-3xl shadow-3xl bg-gray-300 hover:bg-gray-400 p-3 rounded-2xl'
-              onClick={() => router.push('/Game2')}
+              onClick={() => router.push('/game2')}
             >
               Click Here To Play!
             </button>
