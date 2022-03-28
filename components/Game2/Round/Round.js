@@ -1,27 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import TestApp from './TestApp'
+import { useEffect, useState, useReducer, useCallback } from 'react';
+import Dice from "react-dice-roll";
 
-// import { AppContainer } from 'react-hot-loader'
 
-// const render = Component => {
-//   ReactDOM.render(
-//     <AppContainer>
-//       <Component />
-//     </AppContainer>,
-//     document.getElementById('app')
-//   )
-// }
+const Round = () => {
 
-export default function render(Component) {
-	return(
-		<TestApp/>
-	)
-}
-// // Hot Module Replacement API
-// if (module.hot) {
-//   module.hot.accept('./TestApp', () => {
-//     const NextApp = require('./TestApp')
-//     render(NextApp)
-//   })
-// }
+	return (
+		<div className="round">
+			<h1>React Dice Roll</h1>
+			<Dice cheatValue={2} />
+		</div>
+	);
+};
+
+export default Round;
