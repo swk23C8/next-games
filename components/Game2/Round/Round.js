@@ -48,7 +48,7 @@ import styles from './Round.module.scss';
 // INSTANT LOSS
 // x-x-1: Rolling a pair plus 1 is an instant loss
 // 1-2-3: Rolling 1-2-3 is an instant loss
-// INTERMEDIATE
+// INDETERMINATE
 // x-y-z: Any combination that does not result in cases above is an intermediate outcome and requires a re-roll
 const rollCombination = (dice) => {
 	// sort dice
