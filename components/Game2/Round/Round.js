@@ -1,12 +1,13 @@
 import { useEffect, useState, useReducer, useCallback } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
-// import ReactDice from 'react-dice-complete'
 
-import dynamic from 'next/dynamic';
-import { render } from 'react-dom';
-const ReactDice = dynamic(() => import('react-dice-complete'), { ssr: false });
-import dieStyles from 'react-dice-complete/dist/react-dice-complete.css';
+// commenting out this ghetto ass lib
+// import ReactDice from 'react-dice-complete'
+// import dynamic from 'next/dynamic';
+// import { render } from 'react-dom';
+// const ReactDice = dynamic(() => import('react-dice-complete'), { ssr: false });
+// import dieStyles from 'react-dice-complete/dist/react-dice-complete.css';
 
 
 
@@ -43,15 +44,15 @@ export default function Round() {
 			<h1 className={styles.title}>React Dice Roll</h1>
 			{/* <Dice cheatValue={2} size={80}/> */}
 			<h2>Banker</h2>
-			<Dice onRoll={(value) => console.log("banker die 1:", value)} size={80} />
-			<Dice onRoll={(value) => console.log("banker die 2:", value)} size={80} />
-			<Dice onRoll={(value) => console.log("banker die 3:", value)} size={80} />
+			<Dice onRoll={(bDie_1) => console.log("banker die 1:", bDie_1)} size={80} />
+			<Dice onRoll={(bDie_2) => console.log("banker die 2:", bDie_2)} size={80} />
+			<Dice onRoll={(bDie_3) => console.log("banker die 3:", bDie_3)} size={80} />
 			<h2>Player</h2>
-			<Dice onRoll={(value) => console.log("player die 1:", value)} size={80} />
-			<Dice onRoll={(value) => console.log("player die 2:", value)} size={80} />
-			<Dice onRoll={(value) => console.log("player die 3:", value)} size={80} />
+			<Dice onRoll={(pDie_1) => console.log("player die 1:", pDie_1)} size={80} />
+			<Dice onRoll={(pDie_2) => console.log("player die 2:", pDie_2)} size={80} />
+			<Dice onRoll={(pDie_3) => console.log("player die 3:", pDie_3)} size={80} />
 
-			<h2>Banker</h2>
+			{/* <h2>Banker</h2>
 			{(typeof window !== 'undefined') &&
 				<ReactDice
 					className={styles.dieStyles}
@@ -70,7 +71,7 @@ export default function Round() {
 					diceSize={80}
 					rollTime={0.4}
 				/>
-			}
+			} */}
 		</div>
 	);
 }
