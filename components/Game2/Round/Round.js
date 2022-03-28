@@ -56,31 +56,31 @@ const rollCombination = (dice) => {
 	// console.log("dice:", dice);
 	// check for triple
 	if (dice[0] === dice[1] && dice[1] === dice[2]) {
-		return "triple";
+		return "INSTANT WIN: triple";
 	}
 	// check for 4-5-6
 	if (dice[0] === 4 && dice[1] === 5 && dice[2] === 6) {
-		return "instantWin";
+		return "INSTANT WIN: 4-5-6";
 	}
 	// check for x-x-6
 	if (dice[0] === dice[1] && dice[2] === 6) {
-		return "instantWin";
+		return "INSTANT WIN: x-x-6";
 	}
 	// check for x-x-y
 	if (dice[0] === dice[1] && dice[2] !== (6 || 1)) {
-		return "point";
+		return "POINTS: x-x-" + dice[2];
 	}
 	// check for x-x-1
 	if (dice[0] === dice[1] && dice[2] === 1) {
-		return "instantLoss";
+		return "INSTANT LOSS: x-x-1";
 	}
 	// check for 1-2-3
 	if (dice[0] === 1 && dice[1] === 2 && dice[2] === 3) {
-		return "instantLoss";
+		return "INSTANT LOSS: 1-2-3";
 	}
 	// check for x-y-z
 	if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[0] !== dice[2]) {
-		return "intermediate";
+		return "INDETERMINATE: " + dice[0] + "-" + dice[1] + "-" + dice[2];	
 	}
 	// return default
 	return "default";
@@ -88,8 +88,18 @@ const rollCombination = (dice) => {
 };
 
 
-
 export default function Round() {
+
+	useEffect(() => {
+		console.log(rollCombination([6, 6, 6]));
+		console.log(rollCombination([4, 5, 6]));
+		console.log(rollCombination([3, 3, 6]));
+		console.log(rollCombination([4, 4, 5]));
+		console.log(rollCombination([5, 5, 1]));
+		console.log(rollCombination([1, 2, 3]));
+		console.log(rollCombination([3, 5, 6]));
+	})
+
 	return (
 		<div className={styles.round}>
 			<h1 className={styles.title}>React Dice Roll</h1>
