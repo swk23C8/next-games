@@ -66,8 +66,12 @@ const rollCombination = (dice) => {
 	if (dice[0] === dice[1] && dice[2] === 6) {
 		return "INSTANT WIN: x-x-6";
 	}
-	// check for x-x-y
-	if (dice[0] === dice[1] && dice[2] !== (6 || 1)) {
+	// check for x-x-y #1
+	if (dice[0] === dice[1] && dice[2] !== 6) {
+		return "POINTS: x-x-" + dice[2];
+	}
+	// check for x-x-y #2
+	if (dice[0] === dice[1] && dice[2] !== 1) {
 		return "POINTS: x-x-" + dice[2];
 	}
 	// check for x-x-1
