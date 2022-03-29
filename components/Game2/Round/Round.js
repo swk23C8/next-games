@@ -100,41 +100,34 @@ const Round = () => {
 			<h1 className={styles.title}>React Dice Roll</h1>
 
 			<h2>Banker</h2>
-			{/* <button>Roll Banker's Dice</button> */}
+			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			<Dice
 				onRoll={(value) => setBDie_1([value])}
 				size={80}
 				disabled={bDie_1 !== null} />
-			{console.log("banker die 1:", bDie_1)}
-
 			<Dice
 				onRoll={(value) => setBDie_2([value])}
 				size={80}
 				disabled={bDie_2 !== null} />
-			{console.log("banker die 2:", bDie_2)}
-
 			<Dice
 				onRoll={(value) => setBDie_3([value])}
 				size={80}
 				disabled={bDie_3 !== null} />
-			{console.log("banker die 3:", bDie_3)}
 
 			<h2>Player</h2>
+			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
 			<Dice
 				onRoll={(value) => setPDie_1([value])}
 				size={80}
 				disabled={pDie_1 !== null} />
-			{console.log("player die 1:", pDie_1)}
 			<Dice
 				onRoll={(value) => setPDie_2([value])}
 				size={80}
 				disabled={pDie_2 !== null} />
-			{console.log("player die 2:", pDie_2)}
 			<Dice
 				onRoll={(value) => setPDie_3([value])}
 				size={80}
 				disabled={pDie_3 !== null} />
-			{console.log("player die 3:", pDie_3)}
 
 			<div></div>
 			{/* button to clear dice value */}
