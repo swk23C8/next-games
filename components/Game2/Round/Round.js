@@ -59,10 +59,10 @@ const rollCombination = (dice) => {
 	// return dice.reduce((acc, curr) => acc + curr, 0);
 };
 
-// reset Banker and Player dice
-const resetRolls = (dice) => {
-	return "default";
-};
+// // reset Banker and Player dice
+// const resetRolls = (dice) => {
+// 	return "default";
+// };
 
 
 // class Round extends Component {
@@ -84,14 +84,19 @@ const Round = () => {
 	// const [pDice, setPDice] = useState([null, null, null]);
 
 	useEffect(() => {
-		console.log(rollCombination([6, 6, 6]));
-		console.log(rollCombination([4, 5, 6]));
-		console.log(rollCombination([3, 3, 6]));
-		console.log(rollCombination([4, 4, 5]));
-		console.log(rollCombination([5, 5, 1]));
-		console.log(rollCombination([1, 2, 3]));
-		console.log(rollCombination([3, 5, 6]));
-		console.log(rollCombination([1, 1, 1]));
+		// console.log(rollCombination([6, 6, 6]));
+		// console.log(rollCombination([4, 5, 6]));
+		// console.log(rollCombination([3, 3, 6]));
+		// console.log(rollCombination([4, 4, 5]));
+		// console.log(rollCombination([5, 5, 1]));
+		// console.log(rollCombination([1, 2, 3]));
+		// console.log(rollCombination([3, 5, 6]));
+		// console.log(rollCombination([1, 1, 1]));
+		// console.log(rollCombination([2, 6, 6]));
+		// console.log(rollCombination([1, 2, 3]));
+
+		// POINTS: x-x-3 
+		// console.log(rollCombination([5, 5, 3]));
 	}, []);
 
 	return (
@@ -100,34 +105,38 @@ const Round = () => {
 			<h1 className={styles.title}>React Dice Roll</h1>
 
 			<h2>Banker</h2>
-			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			<Dice
-				onRoll={(value) => setBDie_1([value])}
+				onRoll={(value) => setBDie_1(value)}
 				size={80}
 				disabled={bDie_1 !== null} />
 			<Dice
-				onRoll={(value) => setBDie_2([value])}
+				onRoll={(value) => setBDie_2(value)}
 				size={80}
 				disabled={bDie_2 !== null} />
 			<Dice
-				onRoll={(value) => setBDie_3([value])}
+				onRoll={(value) => setBDie_3(value)}
 				size={80}
 				disabled={bDie_3 !== null} />
+			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
+			{console.log(rollCombination([bDie_1, bDie_2, bDie_3]))}
+
 
 			<h2>Player</h2>
-			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
 			<Dice
-				onRoll={(value) => setPDie_1([value])}
+				onRoll={(value) => setPDie_1(value)}
 				size={80}
 				disabled={pDie_1 !== null} />
 			<Dice
-				onRoll={(value) => setPDie_2([value])}
+				onRoll={(value) => setPDie_2(value)}
 				size={80}
 				disabled={pDie_2 !== null} />
 			<Dice
-				onRoll={(value) => setPDie_3([value])}
+				onRoll={(value) => setPDie_3(value)}
 				size={80}
 				disabled={pDie_3 !== null} />
+			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
+			{console.log(rollCombination([pDie_1, pDie_2, pDie_3]))}
+
 
 			<div></div>
 			{/* button to clear dice value */}
