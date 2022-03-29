@@ -59,10 +59,29 @@ const rollCombination = (dice) => {
 	// return dice.reduce((acc, curr) => acc + curr, 0);
 };
 
+// reset Banker and Player dice
+const resetRolls = (dice) => {
+	return "default";
+};
 
 
 // class Round extends Component {
 const Round = () => {
+
+	// Banker dice useStates
+	const [bDie_1, setBDie_1] = useState(null);
+	const [bDie_2, setBDie_2] = useState(null);
+	const [bDie_3, setBDie_3] = useState(null);
+
+	// Player dice useStates
+	const [pDie_1, setPDie_1] = useState(null);
+	const [pDie_2, setPDie_2] = useState(null);
+	const [pDie_3, setPDie_3] = useState(null);
+
+
+
+	// const [bDice, setBDice] = useState([null, null, null]);
+	// const [pDice, setPDice] = useState([null, null, null]);
 
 	useEffect(() => {
 		console.log(rollCombination([6, 6, 6]));
@@ -77,19 +96,59 @@ const Round = () => {
 
 	return (
 		<div className={styles.round}>
+			{console.log("")}
 			<h1 className={styles.title}>React Dice Roll</h1>
+
 			<h2>Banker</h2>
-			{/* button to roll all dice */}
-			
-			<Dice onRoll={(bDie_1) => console.log("banker die 1:", bDie_1)} size={80} />
-			<Dice onRoll={(bDie_2) => console.log("banker die 2:", bDie_2)} size={80} />
-			<Dice onRoll={(bDie_3) => console.log("banker die 3:", bDie_3)} size={80} />
+			{/* <button>Roll Banker's Dice</button> */}
+			<Dice
+				onRoll={(value) => setBDie_1([value])}
+				size={80}
+				disabled={bDie_1 !== null} />
+			{console.log("banker die 1:", bDie_1)}
+
+			<Dice
+				onRoll={(value) => setBDie_2([value])}
+				size={80}
+				disabled={bDie_2 !== null} />
+			{console.log("banker die 2:", bDie_2)}
+
+			<Dice
+				onRoll={(value) => setBDie_3([value])}
+				size={80}
+				disabled={bDie_3 !== null} />
+			{console.log("banker die 3:", bDie_3)}
 
 			<h2>Player</h2>
+			<Dice
+				onRoll={(value) => setPDie_1([value])}
+				size={80}
+				disabled={pDie_1 !== null} />
+			{console.log("player die 1:", pDie_1)}
+			<Dice
+				onRoll={(value) => setPDie_2([value])}
+				size={80}
+				disabled={pDie_2 !== null} />
+			{console.log("player die 2:", pDie_2)}
+			<Dice
+				onRoll={(value) => setPDie_3([value])}
+				size={80}
+				disabled={pDie_3 !== null} />
+			{console.log("player die 3:", pDie_3)}
 
-			<Dice onRoll={(pDie_1) => console.log("player die 1:", pDie_1)} size={80} />
-			<Dice onRoll={(pDie_2) => console.log("player die 2:", pDie_2)} size={80} />
-			<Dice onRoll={(pDie_3) => console.log("player die 3:", pDie_3)} size={80} />
+			<div></div>
+			{/* button to clear dice value */}
+			<button
+				onClick={() => {
+					setBDie_1(null);
+					setBDie_2(null);
+					setBDie_3(null);
+					setPDie_1(null);
+					setPDie_2(null);
+					setPDie_3(null);
+				}}>
+				Clear Dice
+			</button>
 		</div>
 	);
 }
