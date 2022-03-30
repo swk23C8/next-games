@@ -34,7 +34,7 @@ const Header = () => {
                       : styles.link
                   }
                 >
-                  Game1
+                  Head's and Tails
                 </a>
               </Link>
             </li>
@@ -47,7 +47,7 @@ const Header = () => {
                       : styles.link
                   }
                 >
-                  Game2
+                  Cee-Lo
                 </a>
               </Link>
             </li>

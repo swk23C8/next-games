@@ -18,7 +18,7 @@ const HomePage = () => {
         <p className={styles.description}>
           Ayo this is a nextjs project.
         </p>
-        <Link href="/game">
+        <Link href="/game2">
           <a>Go to game</a>
         </Link>
         <Paper elevation={4} className='p-10'>
