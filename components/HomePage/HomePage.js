@@ -13,20 +13,17 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       <section className={styles.main}>
-        <h1 className={styles.title}>Hello everyone!</h1>
+        <h1 className={styles.title}>Check this out beans</h1>
 
         <p className={styles.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste corporis
-          ipsam nostrum voluptatem dolores sint ducimus sunt quidem placeat
-          accusantium nemo aut magni voluptatum aliquam, iusto reprehenderit
-          quam nulla maxime.
+          Ayo this is a nextjs project.
         </p>
         <Link href="/game">
           <a>Go to game</a>
         </Link>
         <Paper elevation={4} className='p-10'>
           <div className='text-center space-y-6'>
-            <h1 className='text-4xl font-bold'>Pig</h1>
+            <h1 className='text-4xl font-bold'>Hooman Shrek</h1>
             <button
               className='text-3xl shadow-3xl bg-gray-300 hover:bg-gray-400 p-3 rounded-2xl'
               onClick={() => router.push('/game2')}

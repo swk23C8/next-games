@@ -9,12 +9,12 @@ const Footer = () => {
         {'© '}
         <a
           color="inherit"
-          href="https://github.com/igorklyopov"
+          href="https://github.com/swk23c8"
           target="_blank"
           rel="noopener noreferrer"
           className="copyrightLink"
         >
-          by Igor Klyopov
+          by swk23c8
         </a>{' '}
         {new Date().getFullYear()}
       </Container>

@@ -26,15 +26,28 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href="/game">
+              <Link href="/game1">
                 <a
                   className={
-                    pathname === '/game'
+                    pathname === '/game1'
                       ? `${styles.link} ${styles.active}`
                       : styles.link
                   }
                 >
-                  Game
+                  Game1
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/game2">
+                <a
+                  className={
+                    pathname === '/game2'
+                      ? `${styles.link} ${styles.active}`
+                      : styles.link
+                  }
+                >
+                  Game2
                 </a>
               </Link>
             </li>

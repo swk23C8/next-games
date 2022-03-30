@@ -63,6 +63,10 @@ const rollCombination = (dice) => {
 
 const score = (dice) => {
 	dice.sort();
+	// check if die values are null
+	if (dice[0] === null || dice[1] === null || dice[2] === null) {
+		return 'null';
+	}
 	if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
 	if (dice.join() === "4,5,6") return 10;
 	if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
@@ -88,22 +92,7 @@ const Round = () => {
 	const [pDie_3, setPDie_3] = useState(null);
 
 
-
-	// const [bDice, setBDice] = useState([null, null, null]);
-	// const [pDice, setPDice] = useState([null, null, null]);
-
 	useEffect(() => {
-		// console.log(rollCombination([6, 6, 6]));
-		// console.log(rollCombination([4, 5, 6]));
-		// console.log(rollCombination([3, 3, 6]));
-		// console.log(rollCombination([4, 4, 5]));
-		// console.log(rollCombination([5, 5, 1]));
-		// console.log(rollCombination([1, 2, 3]));
-		// console.log(rollCombination([3, 5, 6]));
-		// console.log(rollCombination([1, 1, 1]));
-		// console.log(rollCombination([2, 6, 6]));
-		// console.log(rollCombination([1, 2, 3]));
-
 		// POINTS: x-x-3 
 		// console.log(score([5, 5, 3]));
 		// console.log(score([2, 6, 6]));
@@ -119,7 +108,7 @@ const Round = () => {
 	return (
 		<div className={styles.round}>
 			{console.log("")}
-			<h1 className={styles.title}>React Dice Roll</h1>
+			<h1 className={styles.title}>Cee-Lo (hood nigga's dice game)</h1>
 
 			<h2>Banker</h2>
 			<Dice
@@ -162,11 +151,27 @@ const Round = () => {
 					setBDie_1(null);
 					setBDie_2(null);
 					setBDie_3(null);
+				}}>
+				Clear Banker Dice
+			</button>
+			<button
+				onClick={() => {
 					setPDie_1(null);
 					setPDie_2(null);
 					setPDie_3(null);
 				}}>
-				Clear Dice
+				Clear Player Dice
+			</button>
+			<button
+				onClick={() => {
+					setBDie_1(null);
+					setBDie_2(null);
+					setBDie_3(null);
+					setPDie_1(null);
+					setPDie_2(null);
+					setPDie_3(null);
+				}}>
+				Clear All Dice
 			</button>
 		</div>
 	);
