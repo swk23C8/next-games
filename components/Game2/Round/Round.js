@@ -79,26 +79,27 @@ const score = (dice, currentPlayer) => {
 	}
 }
 
+const pointChecker = (score, currentPlayer) => {
+	// check if die values are null
+	if (score === -2) {
+		return "Roll " + currentPlayer + "'s dice";
+	}
+	if (score === 10) {
+		return "INSTANT WIN";
+	}
+	if (score === -1) {
+		return "INSTANT LOSS";
+	}
+	if (score === 0) {
+		return "INDETERMINATE: ROLL AGAIN!";
+	}
+	return "score: " + score;
+}
+
+
 
 // class Round extends Component {
 const Round = () => {
-
-	const score = (dice) => {
-		dice.sort();
-		// check if die values are null
-		if (dice[0] === null || dice[1] === null || dice[2] === null) {
-			return -2;
-		}
-		if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
-		if (dice.join() === "4,5,6") return 10;
-		if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
-		if (dice.join() === "1,2,3") return -1;
-		if (dice[0] === dice[1] || dice[1] === dice[2] || dice[1] === dice[3]) {
-			const pointDie = dice[0] === dice[1] ? dice[2] : dice[0];
-			return pointDie === 1 ? -1 : pointDie === 6 ? 10 : pointDie;
-		}
-	}
-
 	// Banker useStates
 	const [bDie_1, setBDie_1] = useState(null);
 	const [bDie_2, setBDie_2] = useState(null);
@@ -112,8 +113,6 @@ const Round = () => {
 	const [pDie_3, setPDie_3] = useState(null);
 	const [pScore, setPScore] = useState(null);
 	const [pRoll, setPRoll] = useState(false);
-
-
 
 	useEffect(() => {
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
@@ -140,7 +139,9 @@ const Round = () => {
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
-			<h3>{bScore == -2 ? "Roll Bank's dice" : "score: " + bScore}</h3>
+			{/* <h3>{bScore == -2 ? "Roll Bank's dice" : "score: " + bScore}</h3> */}
+			<h3>{pointChecker(bScore, "Banker")}</h3>
+
 
 			<h2>Player</h2>
 			<Dice
@@ -157,7 +158,8 @@ const Round = () => {
 				disabled={pDie_3 !== null} />
 			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
 			{console.log("score:", pScore)}
-			<h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3>
+			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
+			<h3>{pointChecker(pScore, "Player")}</h3>
 
 			<div></div>
 			{/* button to clear dice value */}
