@@ -34,7 +34,7 @@ const Header = () => {
                       : styles.link
                   }
                 >
-                  Head's and Tails
+                  Head&apos;s and Tails
                 </a>
               </Link>
             </li>
