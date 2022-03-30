@@ -6,7 +6,7 @@ const Game = () => {
   return (
     <>
       <Head>
-        <title>Pig's Double Dice | Game</title>
+        <title>Cee-Lo | Game</title>
         <meta name="description" content="Game page" />
       </Head>
       <GamePage />

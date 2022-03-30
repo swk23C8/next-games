@@ -16,7 +16,7 @@ const GamePage = () => {
     <Round setIsGameStarted={setIsGameStarted} />
   ) : (
     <Container>
-      <h1>50/50: the coin flip game that's never fair</h1>
+      <h1>50/50: the coin flip game that&apos;s never fair</h1>
       <p>Let{"'"}s play?</p>
       <button type="button" onClick={startGame}>
         Start
