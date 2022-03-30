@@ -54,15 +54,24 @@ const rollCombination = (dice) => {
 	if (dice[0] !== 1 && dice[1] === dice[2]) {
 		return "POINTS: x-x-" + dice[2];
 	}
+	// check for x-x-y #3
+
 	// return default
 	return "default";
 	// return dice.reduce((acc, curr) => acc + curr, 0);
 };
 
-// // reset Banker and Player dice
-// const resetRolls = (dice) => {
-// 	return "default";
-// };
+const score = (dice) => {
+	dice.sort();
+	if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
+	if (dice.join() === "4,5,6") return 10;
+	if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
+	if (dice.join() === "1,2,3") return -1;
+	if (dice[0] === dice[1] || dice[1] === dice[2] || dice[1] === dice[3]) {
+		const pointDie = dice[0] === dice[1] ? dice[2] : dice[0];
+		return pointDie === 1 ? -1 : pointDie === 6 ? 10 : pointDie;
+	}
+}
 
 
 // class Round extends Component {
@@ -96,7 +105,15 @@ const Round = () => {
 		// console.log(rollCombination([1, 2, 3]));
 
 		// POINTS: x-x-3 
-		// console.log(rollCombination([5, 5, 3]));
+		// console.log(score([5, 5, 3]));
+		// console.log(score([2, 6, 6]));
+		// console.log(score([6, 6, 6]));
+		// console.log(score([4, 5, 6]));
+		// console.log(score([3, 3, 6]));
+		// console.log(score([4, 4, 5]));
+		// console.log(score([5, 5, 1]));
+		// console.log(score([3, 5, 6]));
+		// console.log(score([1, 1, 1]));
 	}, []);
 
 	return (
@@ -118,7 +135,7 @@ const Round = () => {
 				size={80}
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
-			{console.log(rollCombination([bDie_1, bDie_2, bDie_3]))}
+			{console.log(score([bDie_1, bDie_2, bDie_3]))}
 
 
 			<h2>Player</h2>
@@ -135,7 +152,7 @@ const Round = () => {
 				size={80}
 				disabled={pDie_3 !== null} />
 			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
-			{console.log(rollCombination([pDie_1, pDie_2, pDie_3]))}
+			{console.log(score([pDie_1, pDie_2, pDie_3]))}
 
 
 			<div></div>
