@@ -123,7 +123,7 @@ const Round = () => {
 	return (
 		<div className={styles.round}>
 			{console.log("")}
-			<h1 className={styles.title}>Cee-Lo (hood nigga's dice game)</h1>
+			<h1 className={styles.title}>Cee-Lo (hood nigga&apos;s dice game)</h1>
 
 			<h2>Banker</h2>
 			<Dice
