@@ -16,7 +16,7 @@ const GamePage = () => {
     <Round setIsGameStarted={setIsGameStarted} />
   ) : (
     <Container>
-      <h1>Game</h1>
+      <h1>Cee-Lo: the hood niggas dice game</h1>
       <p>Let{"'"}s play?</p>
       <button type="button" onClick={startGame}>
         Start
