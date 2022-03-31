@@ -2,10 +2,6 @@ import { useEffect, useState, useReducer, useCallback, Component } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
 
-// import ReactDice from 'react-dice-complete';
-// import dieStyles from 'react-dice-complete/dist/react-dice-complete.css';
-
-
 // return roll combination of dice
 // INSTANT WIN
 // triple: All 3 dice are the same, 6-6-6 is the highest roll and 5-5-5 is the next highest and so on
@@ -63,8 +59,39 @@ const submitContact2 = async (event) => {
 	alert(`Is this your full name: ${result.name}`);
 };
 
+const submitBet = async (event) => {
+	event.preventDefault();
+	const bet = event.target.bet.value;
+	const res = await fetch('/api/makeBet', {
+		body: JSON.stringify({
+			bet: bet,
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+	});
+	const result = await res.json();
+	alert(`You bet: ${result.bet}`);
+};
 
-// class Round extends Component {
+const pointChecker = (score, currentPlayer) => {
+	// check if die values are null
+	if (score === -2) {
+		return "Roll " + currentPlayer + "'s dice";
+	}
+	if (score === 10) {
+		return "INSTANT WIN";
+	}
+	if (score === -1) {
+		return "INSTANT LOSS";
+	}
+	if (score === 0) {
+		return "INDETERMINATE: ROLL AGAIN!";
+	}
+	return "score: " + score;
+}
+
 const Round = () => {
 	// Banker useStates
 	const [bDie_1, setBDie_1] = useState(null);
@@ -72,6 +99,7 @@ const Round = () => {
 	const [bDie_3, setBDie_3] = useState(null);
 	const [bScore, setBScore] = useState(null);
 	const [bRoll, setBRoll] = useState(false);
+	const [bMoney, setBMoney] = useState(1000);
 
 	// Player useStates
 	const [pDie_1, setPDie_1] = useState(null);
@@ -79,25 +107,7 @@ const Round = () => {
 	const [pDie_3, setPDie_3] = useState(null);
 	const [pScore, setPScore] = useState(null);
 	const [pRoll, setPRoll] = useState(false);
-
-
-
-	const pointChecker = (score, currentPlayer) => {
-		// check if die values are null
-		if (score === -2) {
-			return "Roll " + currentPlayer + "'s dice";
-		}
-		if (score === 10) {
-			return "INSTANT WIN";
-		}
-		if (score === -1) {
-			return "INSTANT LOSS";
-		}
-		if (score === 0) {
-			return "INDETERMINATE: ROLL AGAIN!";
-		}
-		return "score: " + score;
-	}
+	const [pMoney, setPMoney] = useState(1000);
 
 	useEffect(() => {
 		if (bScore === 0) {
@@ -117,7 +127,7 @@ const Round = () => {
 	return (
 		<div className={styles.round}>
 			{console.log("")}
-			<h1 className={styles.title}>Cee-Lo (hood nigga&apos;s dice game)</h1>
+			<h1 className={styles.title}>Cee-Lo: New Yorker&apos;s favorite dice game</h1>
 
 			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button>
 			<button onClick={() => setPRoll(true)}>Roll Player</button> */}
@@ -159,27 +169,25 @@ const Round = () => {
 			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
 			<h3>{pointChecker(pScore, "Player")}</h3>
 
-			<div></div>
 
-			<form className="flex flex-col" onSubmit={submitContact2}>
-				<label htmlFor="name" className="mb-2 italic">Name</label>
-				<input
-					className="mb-4 border-b-2"
-					id="name"
-					name="name"
-					type="text"
-					autoComplete="name"
-					required
-				/>
-				<button
-					type="submit"
-					className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
-				>
-					Submit
-				</button>
+
+			{/* form for the player to place bets */}
+			<form onSubmit={submitBet}>
+				<label>
+					Bet:
+					<input type="number" name="bet" />
+				</label>
+				<input type="submit" value="Submit Bet" />
 			</form>
 
-			<div></div>
+
+
+			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button> */}
+
+			{/* display money */}
+			<h2>Banker Money: ${bMoney}</h2>
+			<h2>Player Money: ${pMoney}</h2>
+
 			{/* button to clear dice value */}
 			<button
 				onClick={() => {
