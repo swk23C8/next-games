@@ -96,7 +96,10 @@ const pointChecker = (score, currentPlayer) => {
 	return "score: " + score;
 }
 
-
+const submitContact = async (event) => {
+	event.preventDefault();
+	alert(`So your name is ${event.target.name.value}?`);
+};
 
 // class Round extends Component {
 const Round = () => {
@@ -114,6 +117,7 @@ const Round = () => {
 	const [pScore, setPScore] = useState(null);
 	const [pRoll, setPRoll] = useState(false);
 
+
 	useEffect(() => {
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
@@ -123,6 +127,9 @@ const Round = () => {
 		<div className={styles.round}>
 			{console.log("")}
 			<h1 className={styles.title}>Cee-Lo (hood nigga&apos;s dice game)</h1>
+
+			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button>
+			<button onClick={() => setPRoll(true)}>Roll Player</button> */}
 
 			<h2>Banker</h2>
 			<Dice
@@ -160,6 +167,26 @@ const Round = () => {
 			{console.log("score:", pScore)}
 			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
 			<h3>{pointChecker(pScore, "Player")}</h3>
+
+			<div></div>
+
+			<form className="flex flex-col" onSubmit={submitContact}>
+				<label htmlFor="name" className="mb-2 italic">Name</label>
+				<input
+					className="mb-4 border-b-2"
+					id="name"
+					name="name"
+					type="text"
+					autoComplete="name"
+					required
+				/>
+				<button
+					type="submit"
+					className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
+				>
+					Submit
+				</button>
+			</form>
 
 			<div></div>
 			{/* button to clear dice value */}
