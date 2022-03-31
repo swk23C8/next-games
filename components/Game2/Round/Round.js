@@ -96,10 +96,29 @@ const pointChecker = (score, currentPlayer) => {
 	return "score: " + score;
 }
 
-const submitContact = async (event) => {
+const submitContact1 = async (event) => {
 	event.preventDefault();
-	alert(`So your name is ${event.target.name.value}?`);
+	const name = event.target.name.value;
+	const res = await fetch(`https://api.agify.io/?name=${name}`);
+	const result = await res.json();
+	alert(`Hi ${name} your age is most likely: ${result.age}`);
 };
+
+const submitContact2 = async (event) => {
+	event.preventDefault();
+	const name = event.target.name.value;
+	const res = await fetch('/api/apiLearn', {
+	  body: JSON.stringify({
+		 name: name,
+	  }),
+	  headers: {
+		 'Content-Type': 'application/json',
+	  },
+	  method: 'POST',
+	});
+	const result = await res.json();
+	alert(`Is this your full name: ${result.name}`);
+ };
 
 // class Round extends Component {
 const Round = () => {
@@ -170,7 +189,7 @@ const Round = () => {
 
 			<div></div>
 
-			<form className="flex flex-col" onSubmit={submitContact}>
+			<form className="flex flex-col" onSubmit={submitContact2}>
 				<label htmlFor="name" className="mb-2 italic">Name</label>
 				<input
 					className="mb-4 border-b-2"
