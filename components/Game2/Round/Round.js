@@ -18,48 +18,6 @@ import styles from './Round.module.scss';
 // 1-2-3: Rolling 1-2-3 is an instant loss
 // INDETERMINATE
 // x-y-z: Any combination that does not result in cases above is an intermediate outcome and requires a re-roll
-const rollCombination = (dice) => {
-	// sort dice
-	dice.sort((a, b) => a - b);
-	// console.log("dice:", dice);
-	// check for triple
-	if (dice[0] === dice[1] && dice[1] === dice[2]) {
-		return "INSTANT WIN: triple";
-	}
-	// check for 4-5-6
-	if (dice[0] === 4 && dice[1] === 5 && dice[2] === 6) {
-		return "INSTANT WIN: 4-5-6";
-	}
-	// check for 1-2-3
-	if (dice[0] === 1 && dice[1] === 2 && dice[2] === 3) {
-		return "INSTANT LOSS: 1-2-3";
-	}
-	// check for x-x-6
-	if (dice[0] === dice[1] && dice[2] === 6) {
-		return "INSTANT WIN: x-x-6";
-	}
-	// check for x-x-1
-	if (dice[0] === 1 && dice[1] === dice[2]) {
-		return "INSTANT LOSS: x-x-1";
-	}
-	// check for x-y-z
-	if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[0] !== dice[2]) {
-		return "INDETERMINATE: " + dice[0] + "-" + dice[1] + "-" + dice[2];
-	}
-	// check for x-x-y #1
-	if (dice[0] === dice[1] && dice[2] !== 6) {
-		return "POINTS: x-x-" + dice[2];
-	}
-	// check for x-x-y #2
-	if (dice[0] !== 1 && dice[1] === dice[2]) {
-		return "POINTS: x-x-" + dice[2];
-	}
-	// check for x-x-y #3
-
-	// return default
-	return "default";
-	// return dice.reduce((acc, curr) => acc + curr, 0);
-};
 
 const score = (dice, currentPlayer) => {
 	console.log(currentPlayer);
@@ -79,22 +37,7 @@ const score = (dice, currentPlayer) => {
 	}
 }
 
-const pointChecker = (score, currentPlayer) => {
-	// check if die values are null
-	if (score === -2) {
-		return "Roll " + currentPlayer + "'s dice";
-	}
-	if (score === 10) {
-		return "INSTANT WIN";
-	}
-	if (score === -1) {
-		return "INSTANT LOSS";
-	}
-	if (score === 0) {
-		return "INDETERMINATE: ROLL AGAIN!";
-	}
-	return "score: " + score;
-}
+
 
 const submitContact1 = async (event) => {
 	event.preventDefault();
@@ -108,17 +51,18 @@ const submitContact2 = async (event) => {
 	event.preventDefault();
 	const name = event.target.name.value;
 	const res = await fetch('/api/apiLearn', {
-	  body: JSON.stringify({
-		 name: name,
-	  }),
-	  headers: {
-		 'Content-Type': 'application/json',
-	  },
-	  method: 'POST',
+		body: JSON.stringify({
+			name: name,
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
 	});
 	const result = await res.json();
 	alert(`Is this your full name: ${result.name}`);
- };
+};
+
 
 // class Round extends Component {
 const Round = () => {
@@ -137,10 +81,38 @@ const Round = () => {
 	const [pRoll, setPRoll] = useState(false);
 
 
+
+	const pointChecker = (score, currentPlayer) => {
+		// check if die values are null
+		if (score === -2) {
+			return "Roll " + currentPlayer + "'s dice";
+		}
+		if (score === 10) {
+			return "INSTANT WIN";
+		}
+		if (score === -1) {
+			return "INSTANT LOSS";
+		}
+		if (score === 0) {
+			return "INDETERMINATE: ROLL AGAIN!";
+		}
+		return "score: " + score;
+	}
+
 	useEffect(() => {
+		if (bScore === 0) {
+			setBDie_1(null);
+			setBDie_2(null);
+			setBDie_3(null);
+		}
+		if (pScore === 0) {
+			setPDie_1(null);
+			setPDie_2(null);
+			setPDie_3(null);
+		}
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
-	}, [bDie_1, bDie_2, bDie_3, pDie_1, pDie_2, pDie_3]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
