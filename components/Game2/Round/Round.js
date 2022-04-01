@@ -59,7 +59,7 @@ const submitContact2 = async (event) => {
 	alert(`Is this your full name: ${result.name}`);
 };
 
-const submitBet = async (event) => {
+const submitBetTest = async (event) => {
 	event.preventDefault();
 	const bet = event.target.bet.value;
 	const res = await fetch('/api/makeBet', {
@@ -75,22 +75,6 @@ const submitBet = async (event) => {
 	alert(`You bet: ${result.bet}`);
 };
 
-const pointChecker = (score, currentPlayer) => {
-	// check if die values are null
-	if (score === -2) {
-		return "Roll " + currentPlayer + "'s dice";
-	}
-	if (score === 10) {
-		return "INSTANT WIN";
-	}
-	if (score === -1) {
-		return "INSTANT LOSS";
-	}
-	if (score === 0) {
-		return "INDETERMINATE: ROLL AGAIN!";
-	}
-	return "score: " + score;
-}
 
 const Round = () => {
 	// Banker useStates
@@ -100,6 +84,7 @@ const Round = () => {
 	const [bScore, setBScore] = useState(null);
 	const [bRoll, setBRoll] = useState(false);
 	const [bMoney, setBMoney] = useState(1000);
+	const [bBet, setBBet] = useState(0);
 
 	// Player useStates
 	const [pDie_1, setPDie_1] = useState(null);
@@ -108,6 +93,113 @@ const Round = () => {
 	const [pScore, setPScore] = useState(null);
 	const [pRoll, setPRoll] = useState(false);
 	const [pMoney, setPMoney] = useState(1000);
+	const [pBet, setPBet] = useState(0);
+
+	const submitBet = async (event) => {
+		event.preventDefault();
+		const bet = event.target.bet.value;
+		const res = await fetch('/api/makeBet', {
+			body: JSON.stringify({
+				bet: bet,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+		});
+		const result = await res.json();
+		setPBet(bet);
+		// setBMoney(result.money);
+	};
+
+	// const endRound = async () => {
+	// 	const res = await fetch('/api/endRound', {
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		method: 'POST',
+	// 	});
+	// 	const result = await res.json();
+	// 	setBMoney(result.bankerMoney);
+	// 	setPMoney(result.playerMoney);
+	// 	setBBet(0);
+	// 	setPBet(0);
+	// 	setBRoll(false);
+	// 	setPRoll(false);
+	// 	setBScore(null);
+	// 	setPScore(null);
+	// 	setBDie_1(null);
+	// 	setBDie_2(null);
+	// 	setBDie_3(null);
+	// 	setPDie_1(null);
+	// 	setPDie_2(null);
+	// 	setPDie_3(null);
+	// };
+
+	// const rollDice = async (currentPlayer) => {
+	// 	const res = await fetch('/api/rollDice', {
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		method: 'POST',
+	// 	});
+	// 	const result = await res.json();
+	// 	if (currentPlayer === "banker") {
+	// 		setBDie_1(result.dice[0]);
+	// 		setBDie_2(result.dice[1]);
+	// 		setBDie_3(result.dice[2]);
+	// 		setBScore(result.score);
+	// 		setBRoll(true);
+	// 	} else {
+	// 		setPDie_1(result.dice[0]);
+	// 		setPDie_2(result.dice[1]);
+	// 		setPDie_3(result.dice[2]);
+	// 		setPScore(result.score);
+	// 		setPRoll(true);
+	// 	}
+	// };
+
+	// const bankerRoll = () => {
+	// 	rollDice("banker");
+	// };
+
+	// const playerRoll = () => {
+	// 	rollDice("player");
+	// };
+
+	// const bankerBet = () => {
+	// 	submitBetTest();
+	// };
+
+	// const playerBet = () => {
+	// 	submitBetTest();
+	// };
+
+	// const bankerEndRound = () => {
+	// 	endRound();
+	// };
+
+	// const playerEndRound = () => {
+	// 	endRound();
+	// };
+
+	const pointChecker = (score, currentPlayer) => {
+		// check if die values are null
+		if (score === -2) {
+			return "Roll " + currentPlayer + "'s dice";
+		}
+		if (score === 10) {
+			return "INSTANT WIN";
+		}
+		if (score === -1) {
+			return "INSTANT LOSS";
+		}
+		if (score === 0) {
+			return "INDETERMINATE: ROLL AGAIN!";
+		}
+		return "score: " + score;
+
+	}
 
 	useEffect(() => {
 		if (bScore === 0) {
@@ -147,8 +239,12 @@ const Round = () => {
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
-			{/* <h3>{bScore == -2 ? "Roll Bank's dice" : "score: " + bScore}</h3> */}
-			<h3>{pointChecker(bScore, "Banker")}</h3>
+			<h3>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
+			<h3>{(bRoll === true  && bScore === -2)? "Roll Again" : ""}</h3>
+			{/* {console.log(bRoll)} */}
+
+
+			{/* <h3>{pointChecker(bScore, "Banker")}</h3> */}
 
 
 			<h2>Player</h2>
@@ -179,6 +275,7 @@ const Round = () => {
 				</label>
 				<input type="submit" value="Submit Bet" />
 			</form>
+			{console.log("player bet:", pBet)}
 
 
 
@@ -194,6 +291,7 @@ const Round = () => {
 					setBDie_1(null);
 					setBDie_2(null);
 					setBDie_3(null);
+					setBRoll(false);
 				}}>
 				Clear Banker Dice
 			</button>
@@ -202,6 +300,7 @@ const Round = () => {
 					setPDie_1(null);
 					setPDie_2(null);
 					setPDie_3(null);
+					setPRoll(false);
 				}}>
 				Clear Player Dice
 			</button>
@@ -213,6 +312,8 @@ const Round = () => {
 					setPDie_1(null);
 					setPDie_2(null);
 					setPDie_3(null);
+					setBRoll(false);
+					setPRoll(false);
 				}}>
 				Clear All Dice
 			</button>
