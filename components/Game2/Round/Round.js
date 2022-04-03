@@ -80,7 +80,8 @@ const Round = () => {
 	// game result useStates
 	const [result, setResult] = useState(null);
 
-	const notify = () => toast("Wow so easy!");
+	// testing react-toastify
+	const notify = () => toast(result);
 
 	const submitBet = async (event) => {
 		event.preventDefault();
@@ -231,11 +232,11 @@ const Round = () => {
 			setPDie_2(null);
 			setPDie_3(null);
 		}
-
+		notify();
 		gameResult(bScore, pScore);
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
-	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, notify, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 
