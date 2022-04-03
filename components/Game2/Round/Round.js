@@ -177,6 +177,9 @@ const Round = () => {
 		if (dice[0] === null || dice[1] === null || dice[2] === null) {
 			return -2;
 		}
+		// if ((dice[0] === null) && (dice[1] === null) && (dice[2] === null)) {
+		// 	return -2;
+		// }
 		if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
 		if (dice.join() === "4,5,6") return 10;
 		if (dice.join() === "1,2,3") return -1;
@@ -188,6 +191,7 @@ const Round = () => {
 	}
 
 	const pointChecker = (score, currentPlayer) => {
+		
 		// check if die values are null
 		if (score === -2) {
 			return "Roll " + currentPlayer + "'s dice";
@@ -221,6 +225,19 @@ const Round = () => {
 		}
 	}
 
+	// update roll status if score is not null
+	const updateRollStatus = (currentPlayer) => {
+		if (currentPlayer === "banker") {
+			if (bScore !== null) {
+				setBRoll(true);
+			}
+		} else {
+			if (pScore !== null) {
+				setPRoll(true);
+			}
+		}
+	}
+
 	useEffect(() => {
 		if (bScore === 0) {
 			setBDie_1(null);
@@ -232,13 +249,26 @@ const Round = () => {
 			setPDie_2(null);
 			setPDie_3(null);
 		}
+		if (bScore !== null) {
+			setBRoll(true);
+		}
+		if (pScore !== null) {
+			setPRoll(true);
+		}
+		if (bScore === 10) {
+			setResult("BANKER WINS");
+			setPDie_1(1);
+			setPDie_2(2);
+			setPDie_3(3);
+		}
+			
 		gameResult(bScore, pScore);
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
+
 	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
-
 		<div className={styles.round}>
 			<button onClick={notify}>Notify!</button>
 			<ToastContainer
@@ -268,14 +298,17 @@ const Round = () => {
 			<Dice
 				onRoll={(value) => setBDie_1(value)}
 				size={80}
+				// cheatValue={6}
 				disabled={bDie_1 !== null} />
 			<Dice
 				onRoll={(value) => setBDie_2(value)}
 				size={80}
+				// cheatValue={6}
 				disabled={bDie_2 !== null} />
 			<Dice
 				onRoll={(value) => setBDie_3(value)}
 				size={80}
+				// cheatValue={6}
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
