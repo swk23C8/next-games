@@ -232,11 +232,10 @@ const Round = () => {
 			setPDie_2(null);
 			setPDie_3(null);
 		}
-		notify();
 		gameResult(bScore, pScore);
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
-	}, [bDie_1, bDie_2, bDie_3, bScore, notify, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 
@@ -253,7 +252,7 @@ const Round = () => {
 				draggable
 				pauseOnHover
 			/>
-			
+
 			{console.log("")}
 			{console.log("1-2-3 instant loss: " + score([1, 2, 3]))}
 			{console.log("1-1-1 instant win: " + score([1, 1, 1]))}
