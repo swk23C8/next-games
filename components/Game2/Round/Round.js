@@ -1,6 +1,8 @@
 import { useEffect, useState, useReducer, useCallback, Component } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // return roll combination of dice
 // INSTANT WIN
@@ -14,26 +16,6 @@ import styles from './Round.module.scss';
 // 1-2-3: Rolling 1-2-3 is an instant loss
 // INDETERMINATE
 // x-y-z: Any combination that does not result in cases above is an intermediate outcome and requires a re-roll
-
-const score = (dice, currentPlayer) => {
-	console.log(currentPlayer);
-
-	dice.sort();
-	// check if die values are null
-	if (dice[0] === null || dice[1] === null || dice[2] === null) {
-		return -2;
-	}
-	if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
-	if (dice.join() === "4,5,6") return 10;
-	if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
-	if (dice.join() === "1,2,3") return -1;
-	if (dice[0] === dice[1] || dice[1] === dice[2] || dice[1] === dice[3]) {
-		const pointDie = dice[0] === dice[1] ? dice[2] : dice[0];
-		return pointDie === 1 ? -1 : pointDie === 6 ? 10 : pointDie;
-	}
-}
-
-
 
 const submitContact1 = async (event) => {
 	event.preventDefault();
@@ -97,6 +79,8 @@ const Round = () => {
 
 	// game result useStates
 	const [result, setResult] = useState(null);
+
+	const notify = () => toast("Wow so easy!");
 
 	const submitBet = async (event) => {
 		event.preventDefault();
@@ -255,7 +239,20 @@ const Round = () => {
 
 	return (
 
-		< div className={styles.round} >
+		<div className={styles.round}>
+			<button onClick={notify}>Notify!</button>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={true}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			
 			{console.log("")}
 			{console.log("1-2-3 instant loss: " + score([1, 2, 3]))}
 			{console.log("1-1-1 instant win: " + score([1, 1, 1]))}
@@ -267,7 +264,7 @@ const Round = () => {
 			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button>
 			<button onClick={() => setPRoll(true)}>Roll Player</button> */}
 
-			< h2 > Banker</h2 >
+			<h2> Banker</h2>
 			<Dice
 				onRoll={(value) => setBDie_1(value)}
 				size={80}
@@ -363,7 +360,7 @@ const Round = () => {
 				}}>
 				Clear All Dice
 			</button>
-		</div >
+		</div>
 	);
 }
 
