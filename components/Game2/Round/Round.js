@@ -203,7 +203,8 @@ const Round = () => {
 			return "INSTANT LOSS";
 		}
 		if (score === 0) {
-			return "INDETERMINATE: ROLL AGAIN!";
+			// return "INDETERMINATE: ROLL AGAIN!";
+			return "Roll " + currentPlayer + "'s dice";
 		}
 		return "score: " + score;
 
@@ -222,19 +223,6 @@ const Round = () => {
 		if (bankerScore < playerScore) {
 			setResult("PLAYER WINS");
 			return "PLAYER WINS";
-		}
-	}
-
-	// update roll status if score is not null
-	const updateRollStatus = (currentPlayer) => {
-		if (currentPlayer === "banker") {
-			if (bScore !== null) {
-				setBRoll(true);
-			}
-		} else {
-			if (pScore !== null) {
-				setPRoll(true);
-			}
 		}
 	}
 
@@ -284,11 +272,11 @@ const Round = () => {
 			/>
 
 			{console.log("")}
-			{console.log("1-2-3 instant loss: " + score([1, 2, 3]))}
+			{/* {console.log("1-2-3 instant loss: " + score([1, 2, 3]))}
 			{console.log("1-1-1 instant win: " + score([1, 1, 1]))}
 			{console.log("4-5-6 instant win: " + score([4, 5, 6]))}
 			{console.log("5-5-1 instant loss: " + score([5, 5, 1]))}
-			{console.log("2-2-1 instant loss: " + score([2, 2, 1]))}
+			{console.log("2-2-1 instant loss: " + score([2, 2, 1]))} */}
 			<h1 className={styles.title}> Cee-Lo: New Yorker&apos;s favorite dice game</h1>
 
 			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button>
@@ -313,7 +301,7 @@ const Round = () => {
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
 			<h3>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
-			<h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3>
+			{/* <h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3> */}
 			{/* {console.log(bRoll)} */}
 
 
