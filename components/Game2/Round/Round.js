@@ -95,6 +95,9 @@ const Round = () => {
 	const [pMoney, setPMoney] = useState(1000);
 	const [pBet, setPBet] = useState(0);
 
+	// game result useStates
+	const [result, setResult] = useState(null);
+
 	const submitBet = async (event) => {
 		event.preventDefault();
 		const bet = event.target.bet.value;
@@ -201,6 +204,22 @@ const Round = () => {
 
 	}
 
+	// game result finder
+	const gameResult = (bankerScore, playerScore) => {
+		if (bankerScore === playerScore) {
+			setResult("PUSH");
+			return "TIE";
+		}
+		if (bankerScore > playerScore) {
+			setResult("BANKER WINS");
+			return "BANKER WINS";
+		}
+		if (bankerScore < playerScore) {
+			setResult("PLAYER WINS");
+			return "PLAYER WINS";
+		}
+	}
+
 	useEffect(() => {
 		if (bScore === 0) {
 			setBDie_1(null);
@@ -212,6 +231,7 @@ const Round = () => {
 			setPDie_2(null);
 			setPDie_3(null);
 		}
+		gameResult(bScore, pScore);
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
@@ -240,7 +260,7 @@ const Round = () => {
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
 			<h3>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
-			<h3>{(bRoll === true  && bScore === -2)? "Roll Again" : ""}</h3>
+			<h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3>
 			{/* {console.log(bRoll)} */}
 
 
@@ -284,6 +304,9 @@ const Round = () => {
 			{/* display money */}
 			<h2>Banker Money: ${bMoney}</h2>
 			<h2>Player Money: ${pMoney}</h2>
+
+			{/* display game result */}
+			<h2>Game Result: {result}</h2>
 
 			{/* button to clear dice value */}
 			<button
