@@ -336,15 +336,15 @@ const Round = () => {
 			<Dice
 				onRoll={(value) => setPDie_1(value)}
 				size={80}
-				disabled={pDie_1 !== null} />
+				disabled={pDie_1 !== null || pBet <= 0} />
 			<Dice
 				onRoll={(value) => setPDie_2(value)}
 				size={80}
-				disabled={pDie_2 !== null} />
+				disabled={pDie_2 !== null || pBet <= 0} />
 			<Dice
 				onRoll={(value) => setPDie_3(value)}
 				size={80}
-				disabled={pDie_3 !== null} />
+				disabled={pDie_3 !== null || pBet <= 0} />
 			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
 			{console.log("score:", pScore)}
 			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
