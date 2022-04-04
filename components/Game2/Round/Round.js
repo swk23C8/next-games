@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer, useCallback, Component } from 'react';
+import { useEffect, useState, useReducer, useCallback, Component, useRef } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -191,7 +191,7 @@ const Round = () => {
 	}
 
 	const pointChecker = (score, currentPlayer) => {
-		
+
 		// check if die values are null
 		if (score === -2) {
 			return "Roll " + currentPlayer + "'s dice";
@@ -226,6 +226,15 @@ const Round = () => {
 		}
 	}
 
+	const ref1 = useRef();
+	const ref2 = useRef();
+	const ref3 = useRef();
+	const bankerRollClick = () => {
+		ref1.current.rollDice();
+		ref2.current.rollDice();
+		ref3.current.rollDice();
+	};
+
 	useEffect(() => {
 		if (bScore === 0) {
 			setBDie_1(null);
@@ -249,7 +258,7 @@ const Round = () => {
 			setPDie_2(2);
 			setPDie_3(3);
 		}
-			
+
 		gameResult(bScore, pScore);
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
@@ -287,25 +296,27 @@ const Round = () => {
 				onRoll={(value) => setBDie_1(value)}
 				size={80}
 				// cheatValue={6}
+				ref={ref1}
 				disabled={bDie_1 !== null} />
 			<Dice
 				onRoll={(value) => setBDie_2(value)}
 				size={80}
+				ref={ref2}
 				// cheatValue={6}
 				disabled={bDie_2 !== null} />
 			<Dice
 				onRoll={(value) => setBDie_3(value)}
 				size={80}
 				// cheatValue={6}
+				ref={ref3}
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
 			<h3>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 			{/* <h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3> */}
-			{/* {console.log(bRoll)} */}
 
-
-			{/* <h3>{pointChecker(bScore, "Banker")}</h3> */}
+			{/* roll banker's dice with ref */}
+			<button onClick={bankerRollClick}>Roll Banker</button>
 
 
 			<h2>Player</h2>
@@ -329,9 +340,9 @@ const Round = () => {
 
 
 			{/* form for the player to place bets */}
-			<form onSubmit={submitBet}>
+			<form onSubmit={submitBet} className={styles.makeBet}>
 				<label>
-					Bet:
+					1. Bet:
 					<input type="number" name="bet" />
 				</label>
 				<input type="submit" value="Submit Bet" />

@@ -1,28 +1,33 @@
 .round {
 	font-family: var(--secondary-font);
- 
+
 	text-align: center;
- }
- 
- .title {
+}
+
+.title {
 	font-size: 36px;
 	color: var(--primary-light);
 	text-transform: uppercase;
- }
- 
- .question {
+}
+
+.question {
 	font-size: 24px;
- }
- 
- .message {
+}
+
+.message {
 	font-size: 30px;
- }
- 
- .error {
+}
+
+.error {
 	color: var(--error-color);
- }
- 
- .success {
+}
+
+.success {
 	color: var(--success-color);
- }
- 
+}
+
+.makeBet {
+	font-size: 24px;
+	color: var(--primary-light);
+	text-transform: uppercase;
+}
