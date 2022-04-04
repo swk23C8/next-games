@@ -66,7 +66,6 @@ const Round = () => {
 	const [bScore, setBScore] = useState(null);
 	const [bRoll, setBRoll] = useState(false);
 	const [bMoney, setBMoney] = useState(1000);
-	const [bBet, setBBet] = useState(0);
 
 	// Player useStates
 	const [pDie_1, setPDie_1] = useState(null);
@@ -175,31 +174,31 @@ const Round = () => {
 		dice.sort();
 		// check if die values are null
 		if (dice[0] === null || dice[1] === null || dice[2] === null) {
-			return -2;
+			return -1;
 		}
 		// if ((dice[0] === null) && (dice[1] === null) && (dice[2] === null)) {
 		// 	return -2;
 		// }
 		if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
 		if (dice.join() === "4,5,6") return 10;
-		if (dice.join() === "1,2,3") return -1;
+		if (dice.join() === "1,2,3") return -2;
 		if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
 		if (dice[0] === dice[1] || dice[1] === dice[2] || dice[1] === dice[3]) {
 			const pointDie = dice[0] === dice[1] ? dice[2] : dice[0];
-			return pointDie === 1 ? -1 : pointDie === 6 ? 10 : pointDie;
+			return pointDie === 1 ? -2 : pointDie === 6 ? 10 : pointDie;
 		}
 	}
 
 	const pointChecker = (score, currentPlayer) => {
 
 		// check if die values are null
-		if (score === -2) {
+		if (score === -1) {
 			return "Roll " + currentPlayer + "'s dice";
 		}
 		if (score === 10) {
 			return "INSTANT WIN";
 		}
-		if (score === -1) {
+		if (score === -2) {
 			return "INSTANT LOSS";
 		}
 		if (score === 0) {
@@ -317,9 +316,9 @@ const Round = () => {
 
 			{/* roll banker's dice with ref */}
 			<button
-				disabled={bDie_1 !== null && bDie_2 !== null && bDie_3 !== null}
+				disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
 				onClick={bankerRollClick}>
-				Roll Banker
+				2. Roll Banker
 			</button>
 
 
@@ -395,6 +394,34 @@ const Round = () => {
 					setPRoll(false);
 				}}>
 				Clear All Dice
+			</button>
+			{/* button to reset player bet */}
+			<button
+				onClick={() => {
+					setPBet(0);
+				}}>
+				Reset Player Bet
+			</button>
+			{/* button to reset game */}
+			<button
+
+				onClick={() => {
+					setBDie_1(null);
+					setBDie_2(null);
+					setBDie_3(null);
+					setPDie_1(null);
+					setPDie_2(null);
+					setPDie_3(null);
+					setBRoll(false);
+					setPRoll(false);
+					setPBet(0);
+					setResult("");
+					setBScore(0);
+					setPScore(0);
+					setBMoney(1000);
+					setPMoney(1000);
+				}}>
+				Reset Game
 			</button>
 		</div>
 	);
