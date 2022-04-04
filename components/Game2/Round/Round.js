@@ -268,7 +268,7 @@ const Round = () => {
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 
-	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
@@ -302,19 +302,23 @@ const Round = () => {
 				size={80}
 				// cheatValue={6}
 				ref={ref1}
-				disabled={bDie_1 !== null} />
+				// disabled={bDie_1 !== null} />
+				disabled={true} />
+
 			<Dice
 				onRoll={(value) => setBDie_2(value)}
 				size={80}
 				ref={ref2}
 				// cheatValue={6}
-				disabled={bDie_2 !== null} />
+				// disabled={bDie_2 !== null} />
+				disabled={true} />
 			<Dice
 				onRoll={(value) => setBDie_3(value)}
 				size={80}
 				// cheatValue={6}
 				ref={ref3}
-				disabled={bDie_3 !== null} />
+				// disabled={bDie_3 !== null} />
+				disabled={true} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
 			<h3>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
