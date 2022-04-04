@@ -316,7 +316,11 @@ const Round = () => {
 			{/* <h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3> */}
 
 			{/* roll banker's dice with ref */}
-			<button onClick={bankerRollClick}>Roll Banker</button>
+			<button
+				disabled={bDie_1 !== null && bDie_2 !== null && bDie_3 !== null}
+				onClick={bankerRollClick}>
+				Roll Banker
+			</button>
 
 
 			<h2>Player</h2>
