@@ -211,16 +211,22 @@ const Round = () => {
 
 	// game result finder
 	const gameResult = (bankerScore, playerScore) => {
+		if (playerScore === -1) {
+			setResult("Please roll your dice!");
+			return "Roll player's dice";
+		}
 		if (bankerScore === playerScore) {
 			setResult("PUSH");
 			return "TIE";
 		}
 		if (bankerScore > playerScore) {
 			setResult("BANKER WINS");
+			setPMoney(pMoney - pBet);
 			return "BANKER WINS";
 		}
 		if (bankerScore < playerScore) {
 			setResult("PLAYER WINS");
+			setPMoney(pMoney + pBet);
 			return "PLAYER WINS";
 		}
 	}
@@ -311,7 +317,7 @@ const Round = () => {
 				disabled={bDie_3 !== null} />
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
-			<h3>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
+			<h3>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 			{/* <h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3> */}
 
 			{/* roll banker's dice with ref */}
