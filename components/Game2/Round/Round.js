@@ -240,6 +240,21 @@ const Round = () => {
 		ref3.current.rollDice();
 	};
 
+	// reset dice if score is 0
+	const resetDice = () => {
+		if (bScore === 0) {
+			setBDie_1(null);
+			setBDie_2(null);
+			setBDie_3(null);
+		}
+		if (pScore === 0) {
+			setPDie_1(null);
+			setPDie_2(null);
+			setPDie_3(null);
+		}
+	}
+
+
 	useEffect(() => {
 		if (bScore === 0) {
 			setBDie_1(null);
@@ -293,36 +308,37 @@ const Round = () => {
 			{console.log("2-2-1 instant loss: " + score([2, 2, 1]))} */}
 			<h1 className={styles.title}> Cee-Lo: New Yorker&apos;s favorite dice game</h1>
 
-			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button>
-			<button onClick={() => setPRoll(true)}>Roll Player</button> */}
-
-			<h2> Banker</h2>
-			<Dice
-				onRoll={(value) => setBDie_1(value)}
-				size={80}
-				// cheatValue={6}
-				ref={ref1}
-				// disabled={bDie_1 !== null} />
-				disabled={true} />
-
-			<Dice
-				onRoll={(value) => setBDie_2(value)}
-				size={80}
-				ref={ref2}
-				// cheatValue={6}
-				// disabled={bDie_2 !== null} />
-				disabled={true} />
-			<Dice
-				onRoll={(value) => setBDie_3(value)}
-				size={80}
-				// cheatValue={6}
-				ref={ref3}
-				// disabled={bDie_3 !== null} />
-				disabled={true} />
+			<h2 className={styles.Buser}> Banker</h2>
+			<div className={styles.Bdie1}>
+				<Dice
+					onRoll={(value) => setBDie_1(value)}
+					size={80}
+					// cheatValue={6}
+					ref={ref1}
+					// disabled={bDie_1 !== null} />
+					disabled={true} />
+			</div>
+			<div className={styles.Bdie2}>
+				<Dice
+					onRoll={(value) => setBDie_2(value)}
+					size={80}
+					ref={ref2}
+					// cheatValue={6}
+					// disabled={bDie_2 !== null} />
+					disabled={true} />
+			</div>
+			<div className={styles.Bdie3}>
+				<Dice
+					onRoll={(value) => setBDie_3(value)}
+					size={80}
+					// cheatValue={6}
+					ref={ref3}
+					// disabled={bDie_3 !== null} />
+					disabled={true} />
+			</div>
 			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 			{console.log("score:", bScore)}
-			<h3>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
-			{/* <h3>{(bRoll === true && bScore === -2) ? "Roll Again" : ""}</h3> */}
+			<h3 className={styles.Bresult}>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 
 			{/* roll banker's dice with ref */}
 			<button
@@ -332,46 +348,61 @@ const Round = () => {
 			</button>
 
 
-			<h2>Player</h2>
-			<Dice
-				onRoll={(value) => setPDie_1(value)}
-				size={80}
-				disabled={pDie_1 !== null || pBet <= 0} />
-			<Dice
-				onRoll={(value) => setPDie_2(value)}
-				size={80}
-				disabled={pDie_2 !== null || pBet <= 0} />
-			<Dice
-				onRoll={(value) => setPDie_3(value)}
-				size={80}
-				disabled={pDie_3 !== null || pBet <= 0} />
+			<h2 className={styles.Puser}>Player</h2>
+			<div className={styles.Pdie1}>
+				<Dice
+					onRoll={(value) => setPDie_1(value)}
+					size={80}
+					disabled={pDie_1 !== null || pBet <= 0} />
+			</div>
+			<div className={styles.Pdie2}>
+				<Dice
+					onRoll={(value) => setPDie_2(value)}
+					size={80}
+					disabled={pDie_2 !== null || pBet <= 0} />
+			</div>
+			<div className={styles.Pdie3}>
+				<Dice
+					onRoll={(value) => setPDie_3(value)}
+					size={80}
+					disabled={pDie_3 !== null || pBet <= 0} />
+			</div>
 			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
 			{console.log("score:", pScore)}
 			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
-			<h3>{pointChecker(pScore, "Player")}</h3>
+			<h3 className={styles.Presult}>{pointChecker(pScore, "Player")}</h3>
 
 
+			<div className={styles.betEl}>
+				{/* form for the player to place bets */}
 
-			{/* form for the player to place bets */}
-			<form onSubmit={submitBet} className={styles.makeBet}>
-				<label>
-					1. Bet:
-					<input type="number" name="bet" />
-				</label>
-				<input type="submit" value="Submit Bet" />
-			</form>
-			{console.log("player bet:", pBet)}
+				{console.log("player bet:", pBet)}
 
+				{/* display money */}
+				{/* <h2>Banker Money: ${bMoney}</h2> */}
+				<h2>Username</h2>
+				<h2>Player Money: ${pMoney}</h2>
+				<form onSubmit={submitBet} className={styles.makeBet}>
+					<label>
+						1. Bet:
+						<input type="number" name="bet" />
+					</label>
+					<input type="submit" value="Submit Bet" />
+				</form>
 
+				{/* display game result */}
+				<h2>Game Result: {result}</h2>
 
-			{/* <button onClick={() => setBRoll(true)}>Roll Banker</button> */}
-
-			{/* display money */}
-			<h2>Banker Money: ${bMoney}</h2>
-			<h2>Player Money: ${pMoney}</h2>
-
-			{/* display game result */}
-			<h2>Game Result: {result}</h2>
+				<h2>Hotkeys</h2>
+				<h3>space: bet</h3>
+				<h3>E: halve bet</h3>
+				<h3>R: double bet</h3>
+				<h3>D: roll dice / play</h3>
+			</div>
+			<div className={styles.logEl}>
+				{/* display game log */}
+				<h2>CHAT / GAME LOG GOES HERE</h2>
+			</div>
 
 			{/* button to clear dice value */}
 			<button
@@ -433,7 +464,7 @@ const Round = () => {
 				}}>
 				Reset Game
 			</button>
-		</div>
+		</div >
 	);
 }
 
