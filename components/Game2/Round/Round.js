@@ -76,9 +76,14 @@ const Round = () => {
 	const [pMoney, setPMoney] = useState(1000);
 	const [pBet, setPBet] = useState(0);
 
-	// game result useStates
+	// game useStates
 	const [result, setResult] = useState(null);
+	const [isRoundStarted, setIsRoundStarted] = useState(true)
+	const [roundCount, setRoundCount] = useState(1)
+	const [roundsStatistic, setRoundsStatistic] = useState([]);
+	const [showRoundStatistic, setShowRoundStatistic] = useState(false);
 
+	
 	// testing react-toastify
 	const notify = () => toast(result);
 
@@ -254,6 +259,10 @@ const Round = () => {
 		}
 	}
 
+	const startRound = () => {
+
+	}
+
 
 	useEffect(() => {
 		if (bScore === 0) {
@@ -381,7 +390,7 @@ const Round = () => {
 				{/* display money */}
 				{/* <h2>Banker Money: ${bMoney}</h2> */}
 				<h2>Username</h2>
-				<h2>Player Money: ${pMoney}</h2>
+				<h2>Tokens: {pMoney}</h2>
 				<form onSubmit={submitBet} className={styles.makeBet}>
 					<label>
 						1. Bet:
