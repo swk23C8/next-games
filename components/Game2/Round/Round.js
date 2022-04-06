@@ -321,7 +321,7 @@ const Round = () => {
 			<div className={styles.Bdie1}>
 				<Dice
 					onRoll={(value) => setBDie_1(value)}
-					size={80}
+					size={95}
 					// cheatValue={6}
 					ref={ref1}
 					// disabled={bDie_1 !== null} />
@@ -330,7 +330,7 @@ const Round = () => {
 			<div className={styles.Bdie2}>
 				<Dice
 					onRoll={(value) => setBDie_2(value)}
-					size={80}
+					size={95}
 					ref={ref2}
 					// cheatValue={6}
 					// disabled={bDie_2 !== null} />
@@ -339,7 +339,7 @@ const Round = () => {
 			<div className={styles.Bdie3}>
 				<Dice
 					onRoll={(value) => setBDie_3(value)}
-					size={80}
+					size={95}
 					// cheatValue={6}
 					ref={ref3}
 					// disabled={bDie_3 !== null} />
@@ -361,19 +361,19 @@ const Round = () => {
 			<div className={styles.Pdie1}>
 				<Dice
 					onRoll={(value) => setPDie_1(value)}
-					size={80}
+					size={95}
 					disabled={pDie_1 !== null || pBet <= 0} />
 			</div>
 			<div className={styles.Pdie2}>
 				<Dice
 					onRoll={(value) => setPDie_2(value)}
-					size={80}
+					size={95}
 					disabled={pDie_2 !== null || pBet <= 0} />
 			</div>
 			<div className={styles.Pdie3}>
 				<Dice
 					onRoll={(value) => setPDie_3(value)}
-					size={80}
+					size={95}
 					disabled={pDie_3 !== null || pBet <= 0} />
 			</div>
 			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
