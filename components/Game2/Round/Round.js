@@ -83,7 +83,6 @@ const Round = () => {
 	const [roundsStatistic, setRoundsStatistic] = useState([]);
 	const [showRoundStatistic, setShowRoundStatistic] = useState(false);
 
-	
 	// testing react-toastify
 	const notify = () => toast(result);
 
@@ -296,6 +295,9 @@ const Round = () => {
 
 	return (
 		<div className={styles.round}>
+
+
+
 			<button onClick={notify}>Notify!</button>
 			<ToastContainer
 				position="top-right"
@@ -345,8 +347,8 @@ const Round = () => {
 					// disabled={bDie_3 !== null} />
 					disabled={true} />
 			</div>
-			{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
-			{console.log("score:", bScore)}
+			{/* {console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
+			{console.log("score:", bScore)} */}
 			<h3 className={styles.Bresult}>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 
 			{/* roll banker's dice with ref */}
@@ -376,8 +378,8 @@ const Round = () => {
 					size={95}
 					disabled={pDie_3 !== null || pBet <= 0} />
 			</div>
-			{console.log("player dice:", pDie_1, pDie_2, pDie_3)}
-			{console.log("score:", pScore)}
+			{/* {console.log("player dice:", pDie_1, pDie_2, pDie_3)}
+			{console.log("score:", pScore)} */}
 			{/* <h3>{pScore == -2 ? "Roll Player's dice" : "score: " + pScore}</h3> */}
 			<h3 className={styles.Presult}>{pointChecker(pScore, "Player")}</h3>
 
@@ -385,7 +387,7 @@ const Round = () => {
 			<div className={styles.betEl}>
 				{/* form for the player to place bets */}
 
-				{console.log("player bet:", pBet)}
+				{/* {console.log("player bet:", pBet)} */}
 
 				{/* display money */}
 				{/* <h2>Banker Money: ${bMoney}</h2> */}
@@ -396,7 +398,7 @@ const Round = () => {
 						1. Bet:
 						<input type="number" name="bet" />
 					</label>
-					<input type="submit" value="Submit Bet" />
+					<input className={styles.betButton} type="submit" value="Submit Bet" />
 				</form>
 
 				{/* display game result */}
@@ -411,6 +413,11 @@ const Round = () => {
 			<div className={styles.logEl}>
 				{/* display game log */}
 				<h2>CHAT / GAME LOG GOES HERE</h2>
+				<h2>{"banker dice: " + bDie_1 + " " + bDie_2 + " " + bDie_3}</h2>
+				<h2>{"score: " + bScore}</h2>
+				<h2>{"player dice: " + pDie_1 + " " + pDie_2 + " " + pDie_3}</h2>
+				<h2>{"score: " + pScore}</h2>
+				<h2>{"player bet: " + pBet}</h2>
 			</div>
 
 			{/* button to clear dice value */}
