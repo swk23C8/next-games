@@ -16,7 +16,7 @@ const HomePage = () => {
         <h1 className={styles.title}>Check this out beans</h1>
 
         <p className={styles.description}>
-          Ayo this is a nextjs project.
+          Ayo this is a bean project.
         </p>
         <Link href="/game2">
           <a>Go to game</a>
