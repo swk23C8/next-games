@@ -1,3 +1,6 @@
+// chat with list
+// history with table
+
 import { useEffect, useState, useReducer, useCallback, Component, useRef } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
@@ -244,7 +247,7 @@ const Round = () => {
 		if (bScore === 0) {
 			setBDie_1(null);
 			setBDie_2(null);
-			setBDie_3(null);``
+			setBDie_3(null); ``
 		}
 		if (pScore === 0) {
 			setPDie_1(null);
@@ -268,7 +271,7 @@ const Round = () => {
 	}
 
 	const startRound = () => {
-		
+
 	}
 
 	useEffect(() => {
@@ -303,19 +306,6 @@ const Round = () => {
 
 	return (
 		<div className={styles.round}>
-			<button onClick={notify}>Notify!</button>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={true}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-			/>
-
 			{console.log("")}
 			{/* {console.log("1-2-3 instant loss: " + score([1, 2, 3]))}
 			{console.log("1-1-1 instant win: " + score([1, 1, 1]))}
@@ -400,11 +390,24 @@ const Round = () => {
 				<h2>Tokens: {pMoney}</h2>
 				<form onSubmit={submitBet} className={styles.makeBet}>
 					<label>
-						1. Bet:
+						Bet:
 						<input type="number" name="bet" />
 					</label>
-					<input className={styles.betButton} type="submit" value="Submit Bet" />
+					<input className={styles.betButton} type="submit" value="BET" />
 				</form>
+
+				<button onClick={notify}>Notify!</button>
+				<ToastContainer
+					position="top-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					// rtl={true}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 
 				{/* display game result */}
 				<h2>Game Result: {result}</h2>

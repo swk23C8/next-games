@@ -29,16 +29,16 @@
 .makeBet {
 	font-size: 24px;
 	color: var(--primary-light);
-	text-transform: uppercase;
+	// text-transform: uppercase;
 }
 
 .Buser {
 	/* Banker */
 	position: absolute;
 	height: 44px;
-	width: 118px;
-	left: 113px;
-	top: 219px;
+	width: 105px;
+	left: 107px;
+	top: 245px;
 }
 
 .Bdie1 {
@@ -87,7 +87,7 @@
 	height: 44px;
 	width: 105px;
 	left: 107px;
-	top: 407px;
+	top: 405px;
 	border-radius: nullpx;
 
 }
