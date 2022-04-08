@@ -161,7 +161,7 @@
 
 .betButton {
 	-webkit-text-size-adjust: 100%;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	box-sizing: border-box;
 	margin: 0;
 	line-height: inherit;
@@ -186,4 +186,36 @@
 	box-shadow: 0 5px #ad6215;
 	cursor: pointer;
 	opacity: 1;
+}
+
+.log_window_padding {
+	grid-area: bottom-panel;
+	margin: 5px 5px 10px 5px;
+}
+
+.log_window {
+	display: grid;
+	grid-template-columns: 34px 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: "vertical-switch bottom-panel-container";
+	box-shadow: 0 8px 40px 0 rgb(0 0 0 / 10%);
+}
+
+.log_window_sidebar {
+	grid-area: vertical-switch;
+	border: solid 1px #4c4c4c;
+	border-top-left-radius: 0.4rem;
+	border-bottom-left-radius: 0.4rem;
+}
+
+.log_window_sidebar_selection {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 1.5rem;
+	display: block;
 }
