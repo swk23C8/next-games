@@ -176,13 +176,9 @@ const Round = () => {
 
 	const score = (dice) => {
 		dice.sort();
-		// check if die values are null
 		if (dice[0] === null || dice[1] === null || dice[2] === null) {
 			return -1;
 		}
-		// if ((dice[0] === null) && (dice[1] === null) && (dice[2] === null)) {
-		// 	return -2;
-		// }
 		if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
 		if (dice.join() === "4,5,6") return 10;
 		if (dice.join() === "1,2,3") return -2;
@@ -194,7 +190,6 @@ const Round = () => {
 	}
 
 	const pointChecker = (score, currentPlayer) => {
-
 		// check if die values are null
 		if (score === -1) {
 			return "Roll " + currentPlayer + "'s dice";
@@ -245,11 +240,11 @@ const Round = () => {
 	};
 
 	// reset dice if score is 0
-	const resetDice = () => {
+	const resetIndeterminate = () => {
 		if (bScore === 0) {
 			setBDie_1(null);
 			setBDie_2(null);
-			setBDie_3(null);
+			setBDie_3(null);``
 		}
 		if (pScore === 0) {
 			setPDie_1(null);
@@ -258,10 +253,23 @@ const Round = () => {
 		}
 	}
 
-	const startRound = () => {
-
+	const resetRound = () => {
+		setPBet(0);
+		setBRoll(false);
+		setPRoll(false);
+		setBScore(null);
+		setPScore(null);
+		setBDie_1(null);
+		setBDie_2(null);
+		setBDie_3(null);
+		setPDie_1(null);
+		setPDie_2(null);
+		setPDie_3(null);
 	}
 
+	const startRound = () => {
+		
+	}
 
 	useEffect(() => {
 		if (bScore === 0) {
@@ -295,9 +303,6 @@ const Round = () => {
 
 	return (
 		<div className={styles.round}>
-
-
-
 			<button onClick={notify}>Notify!</button>
 			<ToastContainer
 				position="top-right"

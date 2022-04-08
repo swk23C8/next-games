@@ -1,3 +1,14 @@
+/* lato */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(''),
+       url('../fonts/lato/Lato-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       
+}
+
 /* permanent-marker-regular - latin */
 @font-face {
   font-family: 'Permanent Marker';
