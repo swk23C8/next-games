@@ -480,8 +480,15 @@ const Round = () => {
 				<h3>D: roll dice / play</h3>
 			</div>
 
-			<div className={styles.logEl}>
 
+			<div className={styles.logEl}>
+				{/* display game log
+				<h2>CHAT / GAME LOG GOES HERE</h2>
+				<h2>{"banker dice: " + bDie_1 + " " + bDie_2 + " " + bDie_3}</h2>
+				<h2>{"score: " + bScore}</h2>
+				<h2>{"player dice: " + pDie_1 + " " + pDie_2 + " " + pDie_3}</h2>
+				<h2>{"score: " + pScore}</h2>
+				<h2>{"player bet: " + pBet}</h2> */}
 				<div className={styles.log_window_padding}>
 					<div className={styles.log_window}>
 						<div className={styles.log_window_sidebar}>
@@ -493,7 +500,7 @@ const Round = () => {
 									<a>Log</a>
 								</li>
 							</ul>
-							<a className="_2R92ShVTJILkLQsKntWSZz" href="https://www.bustabit.com/game-settings">
+							<a className={styles.settings} href="https://www.bustabit.com/game-settings">
 								<i className="fas fa-cog"></i>
 							</a>
 						</div>
@@ -513,10 +520,8 @@ const Round = () => {
 											<div className={styles.log_window_channels}>
 												<p className={styles.log_window_channels_header}>channels</p>
 												<div className={styles.log_window_channels_list}>
-													<div className={styles.log_window_channels_list_item}>
-														<button className={styles.log_window_channels_list_item_button}>channel 1</button>
-														<button className={styles.log_window_channels_list_item_button}>channel 2</button>
-													</div>
+													<button className={styles.log_window_channels_list_item_button}>channel 1</button>
+													<button className={styles.log_window_channels_list_item_button}>channel 2</button>
 												</div>
 												<form className={styles.log_window_form}>
 													<div className={styles.log_window_form_input_group}>
@@ -529,17 +534,9 @@ const Round = () => {
 									</div>
 								</div>
 							</div>
-							{/* display game log
-				<h2>CHAT / GAME LOG GOES HERE</h2>
-				<h2>{"banker dice: " + bDie_1 + " " + bDie_2 + " " + bDie_3}</h2>
-				<h2>{"score: " + bScore}</h2>
-				<h2>{"player dice: " + pDie_1 + " " + pDie_2 + " " + pDie_3}</h2>
-				<h2>{"score: " + pScore}</h2>
-				<h2>{"player bet: " + pBet}</h2> */}
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	);
