@@ -517,28 +517,31 @@ const Round = () => {
 													<li className={styles.log_window_content_gucci_messages}>message 2 !</li>
 												</ul>
 											</div>
+
 											<div className={styles.log_window_channels}>
 												<p className={styles.log_window_channels_header}>channels</p>
 												<div className={styles.log_window_channels_list}>
 													<button className={styles.log_window_channels_list_item_button}>channel 1</button>
 													<button className={styles.log_window_channels_list_item_button}>channel 2</button>
 												</div>
-												<form className={styles.log_window_form}>
-													<div className={styles.log_window_form_input_group}>
-														<input className={styles.log_window_form_input} placeholder="Message or /help..." maxLength="1000" value />
-														<button className={styles.log_window_form_button}>send</button>
-													</div>
-												</form>
 											</div>
+
 										</div>
+										<form className={styles.log_window_form}>
+											<div className={styles.log_window_form_input_group}>
+												<input className={styles.log_window_form_input} placeholder="Message or /help..." maxLength="1000" value />
+												<button className={styles.log_window_form_button}>send</button>
+											</div>
+										</form>
 									</div>
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
 
