@@ -489,56 +489,18 @@ const Round = () => {
 				<h2>{"player dice: " + pDie_1 + " " + pDie_2 + " " + pDie_3}</h2>
 				<h2>{"score: " + pScore}</h2>
 				<h2>{"player bet: " + pBet}</h2> */}
-				<div className={styles.log_window_padding}>
-					<div className={styles.log_window}>
-						<div className={styles.log_window_sidebar}>
-							<ul className={styles.log_window_sidebar_selection}>
-								<li className={styles.log_window_sidebar_selection_item}>
-									<a>Chat</a>
-								</li>
-								<li>
-									<a>Log</a>
-								</li>
-							</ul>
-							<a className={styles.settings} href="https://www.bustabit.com/game-settings">
-								<i className="fas fa-cog"></i>
-							</a>
-						</div>
-						<div className={styles.log_window_content_wrapper}>
-							<div className={styles.switchable_area}>
-								<div>
-									<div className={styles.log_window_content_with_form}>
-										<div className={styles.log_window_content_without_form}>
-											<div className={styles.log_window_content_without_form_grid}>
-												<div className={styles.log_window_content_header}>english</div>
-												<button className={styles.log_window_content_unfriend}>unfriend</button>
-												<ul className={styles.log_window_content_gucci}>
-													<li className={styles.log_window_content_gucci_messages}>message 1 !</li>
-													<li className={styles.log_window_content_gucci_messages}>message 2 !</li>
-												</ul>
-											</div>
-
-											<div className={styles.log_window_channels}>
-												<p className={styles.log_window_channels_header}>channels</p>
-												<div className={styles.log_window_channels_list}>
-													<button className={styles.log_window_channels_list_item_button}>channel 1</button>
-													<button className={styles.log_window_channels_list_item_button}>channel 2</button>
-												</div>
-											</div>
-
-										</div>
-										<form className={styles.log_window_form}>
-											<div className={styles.log_window_form_input_group}>
-												<input className={styles.log_window_form_input} placeholder="Message or /help..." maxLength="1000" value />
-												<button className={styles.log_window_form_button}>send</button>
-											</div>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
+				<div className={styles.sideBar}>
+					<ul className={styles.sideBarOptions} >
+						<li className={styles.sideBarChatFrame}>
+							<a className={styles.sideBarChat}>CHAT</a>
+						</li>
+						<li className={styles.sideBarHistoryFrame}>
+							<a className={styles.sideBarHistory}>HISTORY</a>
+						</li>
+					</ul>
+					<a className={styles.sideBarSetting}>S</a>
+				</div>
+				<div className={styles.chatContent}>
 				</div>
 			</div>
 		</div >
