@@ -500,7 +500,67 @@ const Round = () => {
 					</ul>
 					<a className={styles.sideBarSetting}>S</a>
 				</div>
-				<div className={styles.chatContent}>
+				<div className={styles.logElContentBoxFrame}>
+					<div className={styles.switchable_area}>
+						<div>
+							<div className={styles.logElContentBox}>
+								<div className={styles.logElContentChat}>
+									<div className={styles.logElContentChatGrid}>
+										<div className={styles.idkHeader}>
+											<a className={styles.idkHeaderRole}>Admin</a>
+											<span className={styles.idkHeaderName}>THAAD</span>
+										</div>
+										<button className={styles.idkButton}>
+											<i className={styles.idkButtonIcon}>X</i>
+											{" "}unfriend
+										</button>
+										<ul className={styles.chatContent}>
+											<li className={styles.chatContentItem}>
+												<small className={styles.chatContentItemTime}>11:30</small>
+												<a className={styles.chatContentItemUsername}>THAAD</a>
+												:
+												<span className={styles.chatContentItemMessage}> Hi this is my website!</span>
+											</li>
+											<li className={styles.chatContentItem}>
+												<small className={styles.chatContentItemTime}>11:30</small>
+												<a className={styles.chatContentItemUsername}>THAAD</a>
+												:
+												<span className={styles.chatContentItemMessage}> This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. </span>
+											</li>
+											<li className={styles.chatContentItem}>
+												<small className={styles.chatContentItemTime}>11:31</small>
+												<a className={styles.chatContentItemUsername}>Chat Bot</a>
+												:
+												<span className={styles.chatContentItemMessage}> test numbers: 123</span>
+											</li>
+											<li className={styles.chatContentItem}>
+												<small className={styles.chatContentItemTime}>11:35</small>
+												<a className={styles.chatContentItemUsername}>THAAD</a>
+												:
+												<span className={styles.chatContentItemMessage}> test empty message below</span>
+											</li>
+											<li className={styles.chatContentItem}>
+												<small className={styles.chatContentItemTime}>11:35</small>
+												<a className={styles.chatContentItemUsername}>Chat Bot</a>
+												:
+												<span className={styles.chatContentItemMessage}> </span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<form className={styles.logElContentChatForm}>
+									<div className={styles.input_group}>
+										<input className={styles.input_chatMessage}></input>
+										<div className={styles.input_chatMessageSend}>
+											<button className={styles.input_chatMessageSendButton}>
+												<i className={styles.input_chatMessageSendIcon}>send</i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div >
