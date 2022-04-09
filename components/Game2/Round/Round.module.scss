@@ -178,6 +178,21 @@
 	opacity: 1;
 }
 
+.gameResult {
+	margin-top: 80px;
+}
+
+.hotkeysTitle {
+	margin-top: 80px;
+	font-size: 24px;
+	color: var(--primary-light);
+	text-transform: uppercase;
+}
+
+.hotkeys{
+	font-size: 19px;
+	// text-transform: uppercase;
+}
 
 .logEl {
 	position: absolute;

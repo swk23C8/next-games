@@ -471,13 +471,13 @@ const Round = () => {
 				/>
 
 				{/* display game result */}
-				<h2>Game Result: {result}</h2>
+				<h2 className={styles.gameResult}>Game Result: {result}</h2>
 
-				<h2>Hotkeys</h2>
-				<h3>space: bet</h3>
-				<h3>E: halve bet</h3>
-				<h3>R: double bet</h3>
-				<h3>D: roll dice / play</h3>
+				<h1 className={styles.hotkeysTitle}>Hotkeys</h1>
+				<p className={styles.hotkeys}>SPACE: bet</p>
+				<p className={styles.hotkeys}>E: halve bet</p>
+				<p className={styles.hotkeys}>R: double bet</p>
+				<p className={styles.hotkeys}>D: roll dice</p>
 			</div>
 
 
