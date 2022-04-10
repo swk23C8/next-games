@@ -103,79 +103,7 @@ const Round = () => {
 		});
 		const result = await res.json();
 		setPBet(bet);
-		// setBMoney(result.money);
 	};
-
-	// const endRound = async () => {
-	// 	const res = await fetch('/api/endRound', {
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		method: 'POST',
-	// 	});
-	// 	const result = await res.json();
-	// 	setBMoney(result.bankerMoney);
-	// 	setPMoney(result.playerMoney);
-	// 	setBBet(0);
-	// 	setPBet(0);
-	// 	setBRoll(false);
-	// 	setPRoll(false);
-	// 	setBScore(null);
-	// 	setPScore(null);
-	// 	setBDie_1(null);
-	// 	setBDie_2(null);
-	// 	setBDie_3(null);
-	// 	setPDie_1(null);
-	// 	setPDie_2(null);
-	// 	setPDie_3(null);
-	// };
-
-	// const rollDice = async (currentPlayer) => {
-	// 	const res = await fetch('/api/rollDice', {
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		method: 'POST',
-	// 	});
-	// 	const result = await res.json();
-	// 	if (currentPlayer === "banker") {
-	// 		setBDie_1(result.dice[0]);
-	// 		setBDie_2(result.dice[1]);
-	// 		setBDie_3(result.dice[2]);
-	// 		setBScore(result.score);
-	// 		setBRoll(true);
-	// 	} else {
-	// 		setPDie_1(result.dice[0]);
-	// 		setPDie_2(result.dice[1]);
-	// 		setPDie_3(result.dice[2]);
-	// 		setPScore(result.score);
-	// 		setPRoll(true);
-	// 	}
-	// };
-
-	// const bankerRoll = () => {
-	// 	rollDice("banker");
-	// };
-
-	// const playerRoll = () => {
-	// 	rollDice("player");
-	// };
-
-	// const bankerBet = () => {
-	// 	submitBetTest();
-	// };
-
-	// const playerBet = () => {
-	// 	submitBetTest();
-	// };
-
-	// const bankerEndRound = () => {
-	// 	endRound();
-	// };
-
-	// const playerEndRound = () => {
-	// 	endRound();
-	// };
 
 	const score = (dice) => {
 		dice.sort();
@@ -236,42 +164,24 @@ const Round = () => {
 	const ref1 = useRef();
 	const ref2 = useRef();
 	const ref3 = useRef();
-	const bankerRollClick = () => {
-		ref1.current.rollDice();
-		ref2.current.rollDice();
-		ref3.current.rollDice();
-	};
+	let intervalID;
 
-	// reset dice if score is 0
-	const resetIndeterminate = () => {
-		if (bScore === 0) {
-			setBDie_1(null);
-			setBDie_2(null);
-			setBDie_3(null); ``
-		}
-		if (pScore === 0) {
-			setPDie_1(null);
-			setPDie_2(null);
-			setPDie_3(null);
-		}
+	const handleInitInterval = () => {
+		intervalID = setInterval(handleClearInterval, 1500);
 	}
 
-	const resetRound = () => {
-		setPBet(0);
-		setBRoll(false);
-		setPRoll(false);
-		setBScore(null);
-		setPScore(null);
-		setBDie_1(null);
-		setBDie_2(null);
-		setBDie_3(null);
-		setPDie_1(null);
-		setPDie_2(null);
-		setPDie_3(null);
-	}
-
-	const startRound = () => {
-
+	const handleClearInterval = () => {
+		// setBScore(score([bDie_1, bDie_2, bDie_3]))
+		if (bScore === null || -1 || 0) {
+			ref1.current.rollDice();
+			ref2.current.rollDice();
+			ref3.current.rollDice();
+			// setBScore(score([bDie_1, bDie_2, bDie_3]))
+			console.log(bDie_1, bDie_2, bDie_3)
+			console.log(bScore)
+		} else {
+			clearInterval(intervalID);
+		}
 	}
 
 	useEffect(() => {
@@ -309,8 +219,8 @@ const Round = () => {
 			<div className={styles.alphaButtons}>
 				{/* roll banker's dice with ref */}
 				<button
-					disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
-					onClick={bankerRollClick}>
+					// disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
+					onClick={handleInitInterval}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
@@ -387,7 +297,7 @@ const Round = () => {
 					<Dice
 						onRoll={(value) => setBDie_1(value)}
 						size={95}
-						// cheatValue={6}
+						cheatValue={1}
 						ref={ref1}
 						// disabled={bDie_1 !== null} />
 						disabled={true} />
@@ -397,7 +307,7 @@ const Round = () => {
 						onRoll={(value) => setBDie_2(value)}
 						size={95}
 						ref={ref2}
-						// cheatValue={6}
+						cheatValue={1}
 						// disabled={bDie_2 !== null} />
 						disabled={true} />
 				</div>
@@ -405,13 +315,13 @@ const Round = () => {
 					<Dice
 						onRoll={(value) => setBDie_3(value)}
 						size={95}
-						// cheatValue={6}
+						cheatValue={2}
 						ref={ref3}
 						// disabled={bDie_3 !== null} />
 						disabled={true} />
 				</div>
-				{/* {console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
-			{console.log("score:", bScore)} */}
+				{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
+				{console.log("score:", bScore)}
 				<h3 className={styles.Bresult}>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 
 				<h2 className={styles.Puser}>Player</h2>
