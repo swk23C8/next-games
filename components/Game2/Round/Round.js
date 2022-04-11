@@ -185,16 +185,45 @@ const Round = () => {
 	// 	}
 	// }, [bScore]);
 
-	const someFunc = useCallback(
-		() => console.log("This is a random function"),
-		[]
-	);
+	const someFunc = useCallback(() => {
+		console.log(bScore)
+		if (bScore === null || bScore === -1 || bScore === 0) {
+			ref1.current.rollDice();
+			ref2.current.rollDice();
+			ref3.current.rollDice();
+		}
+		else {
+			clearInterval(intervalID);
+		}
+		console.log("This is a random function")
+	}, [bScore]);
+
+	const handleBankerDiceStart = useCallback(() => {
+
+		intervalID.current = setInterval(() => {
+			ref1.current.rollDice();
+			ref2.current.rollDice();
+			ref3.current.rollDice();
+		}, 2500)
+
+	}, [])
+
+	const handleBankerDiceStop = useCallback(() => {
+		clearInterval(intervalID.current);
+	}, [])
 
 	useEffect(() => {
 		console.log("Use effect of someFunc's called");
-	}, [someFunc]);
+		console.log(bScore)
+		if (bScore === null || bScore === -1 || bScore === 0) {
+			handleBankerDiceStart();
+		}
+		else {
+			handleBankerDiceStop();
+		}
+	}, [someFunc, handleBankerDiceStart, handleBankerDiceStop, bScore]);
 
-	
+
 	useEffect(() => {
 		// handleInitInterval(bScore);
 
@@ -208,9 +237,9 @@ const Round = () => {
 			setPDie_2(null);
 			setPDie_3(null);
 		}
-		if (bScore !== null) {
-			setBRoll(true);
-		}
+		// if (bScore !== null) {
+		// 	setBRoll(true);
+		// }
 		if (pScore !== null) {
 			setPRoll(true);
 		}
@@ -233,7 +262,7 @@ const Round = () => {
 				{/* roll banker's dice with ref */}
 				<button
 					// disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
-					onClick={someFunc}>
+					onClick={handleBankerDiceStart}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
