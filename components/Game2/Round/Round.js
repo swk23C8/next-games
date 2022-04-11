@@ -185,8 +185,17 @@ const Round = () => {
 	// 	}
 	// }, [bScore]);
 
-	useEffect(() => {
+	const someFunc = useCallback(
+		() => console.log("This is a random function"),
+		[]
+	);
 
+	useEffect(() => {
+		console.log("Use effect of someFunc's called");
+	}, [someFunc]);
+
+	
+	useEffect(() => {
 		// handleInitInterval(bScore);
 
 		// if (bScore === 0) {
@@ -216,7 +225,7 @@ const Round = () => {
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 
-	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, handleInitInterval, intervalID, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, intervalID, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
@@ -224,7 +233,7 @@ const Round = () => {
 				{/* roll banker's dice with ref */}
 				<button
 					// disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
-					onClick={handleInitInterval(bScore)}>
+					onClick={someFunc}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
