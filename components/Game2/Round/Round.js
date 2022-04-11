@@ -164,32 +164,36 @@ const Round = () => {
 	const ref1 = useRef();
 	const ref2 = useRef();
 	const ref3 = useRef();
-	let intervalID;
+	const intervalID = useRef();
+	// let intervalID;
 
-	const handleInitInterval = () => {
-		intervalID = setInterval(handleClearInterval, 1500);
-	}
 
-	const handleClearInterval = () => {
-		// setBScore(score([bDie_1, bDie_2, bDie_3]))
-		if (bScore === null || -1 || 0) {
-			ref1.current.rollDice();
-			ref2.current.rollDice();
-			ref3.current.rollDice();
-			// setBScore(score([bDie_1, bDie_2, bDie_3]))
-			console.log(bDie_1, bDie_2, bDie_3)
-			console.log(bScore)
-		} else {
-			clearInterval(intervalID);
-		}
-	}
+	// const handleInitInterval = useCallback(() => {
+	// 	// console.log(bScore)
+	// 	intervalID.current = setInterval(handleClearInterval(bScore), 1500);
+	// }, [bScore, handleClearInterval]);
+
+	// const handleClearInterval = useCallback(() => {
+	// 	console.log(bScore);
+	// 	if (bScore === null || bScore === -1 || bScore === 0) {
+	// 		ref1.current.rollDice();
+	// 		ref2.current.rollDice();
+	// 		ref3.current.rollDice();
+	// 	}
+	// 	else {
+	// 		clearInterval(intervalID);
+	// 	}
+	// }, [bScore]);
 
 	useEffect(() => {
-		if (bScore === 0) {
-			setBDie_1(null);
-			setBDie_2(null);
-			setBDie_3(null);
-		}
+
+		// handleInitInterval(bScore);
+
+		// if (bScore === 0) {
+		// 	setBDie_1(null);
+		// 	setBDie_2(null);
+		// 	setBDie_3(null);
+		// }
 		if (pScore === 0) {
 			setPDie_1(null);
 			setPDie_2(null);
@@ -212,7 +216,7 @@ const Round = () => {
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 
-	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, handleInitInterval, intervalID, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
@@ -220,7 +224,7 @@ const Round = () => {
 				{/* roll banker's dice with ref */}
 				<button
 					// disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
-					onClick={handleInitInterval}>
+					onClick={handleInitInterval(bScore)}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
@@ -297,7 +301,7 @@ const Round = () => {
 					<Dice
 						onRoll={(value) => setBDie_1(value)}
 						size={95}
-						cheatValue={1}
+						// cheatValue={1}
 						ref={ref1}
 						// disabled={bDie_1 !== null} />
 						disabled={true} />
@@ -307,7 +311,7 @@ const Round = () => {
 						onRoll={(value) => setBDie_2(value)}
 						size={95}
 						ref={ref2}
-						cheatValue={1}
+						// cheatValue={1}
 						// disabled={bDie_2 !== null} />
 						disabled={true} />
 				</div>
@@ -315,13 +319,13 @@ const Round = () => {
 					<Dice
 						onRoll={(value) => setBDie_3(value)}
 						size={95}
-						cheatValue={2}
+						// cheatValue={2}
 						ref={ref3}
 						// disabled={bDie_3 !== null} />
 						disabled={true} />
 				</div>
-				{console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
-				{console.log("score:", bScore)}
+				{/* {console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
+				{console.log("score:", bScore)} */}
 				<h3 className={styles.Bresult}>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 
 				<h2 className={styles.Puser}>Player</h2>
