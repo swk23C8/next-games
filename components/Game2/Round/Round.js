@@ -173,14 +173,16 @@ const Round = () => {
 
 		if (bScoreRef.current === null || bScoreRef.current === -1 || bScoreRef.current === 0) {
 			intervalID.current = setInterval(() => {
+
+				if (bScoreRef.current !== null && bScoreRef.current !== -1 && bScoreRef.current !== 0) {
+					console.log("stop dice case: " + bScoreRef.current)
+					clearInterval(intervalID.current);
+					return;
+				}
 				console.log("roll dice case: " + bScoreRef.current)
 				ref1.current.rollDice();
 				ref2.current.rollDice();
 				ref3.current.rollDice();
-				if (bScoreRef.current !== null && bScoreRef.current !== -1 && bScoreRef.current !== 0) {
-					console.log("stop dice case: " + bScoreRef.current)
-					clearInterval(intervalID.current);
-				}
 			}, 3000);
 		}
 		else {
