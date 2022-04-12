@@ -1,7 +1,7 @@
 // chat with list
 // history with table
 
-import { useEffect, useState, useReducer, useCallback, Component, useRef } from 'react';
+import { useEffect, useState, useReducer, useCallback, Component, useRef, useMemo } from 'react';
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -68,7 +68,7 @@ const Round = () => {
 	const [bDie_3, setBDie_3] = useState(null);
 	const [bScore, setBScore] = useState(null);
 	const [bRoll, setBRoll] = useState(false);
-	const [bMoney, setBMoney] = useState(1000);
+	const [bDice, setBDice] = useState([null, null, null]);
 
 	// Player useStates
 	const [pDie_1, setPDie_1] = useState(null);
@@ -165,104 +165,64 @@ const Round = () => {
 	const ref2 = useRef();
 	const ref3 = useRef();
 	const intervalID = useRef();
-	// let intervalID;
+	const bScoreRef = useRef(bScore);
 
+	const handleBankerDiceStart = () => {
 
-	// const handleInitInterval = useCallback(() => {
-	// 	// console.log(bScore)
-	// 	intervalID.current = setInterval(handleClearInterval(bScore), 1500);
-	// }, [bScore, handleClearInterval]);
+		console.log("testing case: " + bScoreRef.current)
 
-	// const handleClearInterval = useCallback(() => {
-	// 	console.log(bScore);
-	// 	if (bScore === null || bScore === -1 || bScore === 0) {
-	// 		ref1.current.rollDice();
-	// 		ref2.current.rollDice();
-	// 		ref3.current.rollDice();
-	// 	}
-	// 	else {
-	// 		clearInterval(intervalID);
-	// 	}
-	// }, [bScore]);
-
-	const someFunc = useCallback(() => {
-		console.log(bScore)
-		if (bScore === null || bScore === -1 || bScore === 0) {
-			ref1.current.rollDice();
-			ref2.current.rollDice();
-			ref3.current.rollDice();
+		if (bScoreRef.current === null || bScoreRef.current === -1 || bScoreRef.current === 0) {
+			intervalID.current = setInterval(() => {
+				console.log("roll dice case: " + bScoreRef.current)
+				ref1.current.rollDice();
+				ref2.current.rollDice();
+				ref3.current.rollDice();
+				if (bScoreRef.current !== null && bScoreRef.current !== -1 && bScoreRef.current !== 0) {
+					console.log("stop dice case: " + bScoreRef.current)
+					clearInterval(intervalID.current);
+				}
+			}, 3000);
 		}
 		else {
-			clearInterval(intervalID);
+			console.log("dice not rolling as condition is false")
 		}
-		console.log("This is a random function")
-	}, [bScore]);
-
-	const handleBankerDiceStart = useCallback(() => {
-
-		intervalID.current = setInterval(() => {
-			ref1.current.rollDice();
-			ref2.current.rollDice();
-			ref3.current.rollDice();
-		}, 2500)
-
-	}, [])
+	}
 
 	const handleBankerDiceStop = useCallback(() => {
+		console.log("stop dice case: " + bScoreRef.current)
 		clearInterval(intervalID.current);
 	}, [])
 
-	useEffect(() => {
-		console.log("Use effect of someFunc's called");
-		console.log(bScore)
-		if (bScore === null || bScore === -1 || bScore === 0) {
-			handleBankerDiceStart();
-		}
-		else {
-			handleBankerDiceStop();
-		}
-	}, [someFunc, handleBankerDiceStart, handleBankerDiceStop, bScore]);
 
+	// useEffect(() => {
+	// 	bScoreRef.current = bScore;
+	// }, [bScore]);
 
 	useEffect(() => {
-		// handleInitInterval(bScore);
-
-		// if (bScore === 0) {
-		// 	setBDie_1(null);
-		// 	setBDie_2(null);
-		// 	setBDie_3(null);
-		// }
-		if (pScore === 0) {
-			setPDie_1(null);
-			setPDie_2(null);
-			setPDie_3(null);
-		}
-		// if (bScore !== null) {
-		// 	setBRoll(true);
-		// }
-		if (pScore !== null) {
-			setPRoll(true);
-		}
 		if (bScore === 10) {
 			setResult("BANKER WINS");
 			setPDie_1(1);
 			setPDie_2(2);
 			setPDie_3(3);
 		}
-
 		gameResult(bScore, pScore);
-		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
+		setPScore(score([pDie_1, pDie_2, pDie_3]))
+		bScoreRef.current = bScore;
+		console.log("useEffect current score on render: " + bScore);
 
-	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, intervalID, pDie_1, pDie_2, pDie_3, pScore]);
+
+	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
 			<div className={styles.alphaButtons}>
-				{/* roll banker's dice with ref */}
 				<button
-					// disabled={bDie_1 !== null || bDie_2 !== null || bDie_3 !== null || pBet <= 0}
 					onClick={handleBankerDiceStart}>
+					2. Roll Banker
+				</button>
+				<button
+					onClick={handleBankerDiceStop}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
@@ -337,7 +297,9 @@ const Round = () => {
 				<h2 className={styles.Buser}> Banker</h2>
 				<div className={styles.Bdie1}>
 					<Dice
-						onRoll={(value) => setBDie_1(value)}
+						onRoll={(value) => {
+							setBDie_1(value);
+						}}
 						size={95}
 						// cheatValue={1}
 						ref={ref1}
@@ -346,16 +308,20 @@ const Round = () => {
 				</div>
 				<div className={styles.Bdie2}>
 					<Dice
-						onRoll={(value) => setBDie_2(value)}
+						onRoll={(value) => {
+							setBDie_2(value)
+						}}
 						size={95}
-						ref={ref2}
 						// cheatValue={1}
+						ref={ref2}
 						// disabled={bDie_2 !== null} />
 						disabled={true} />
 				</div>
 				<div className={styles.Bdie3}>
 					<Dice
-						onRoll={(value) => setBDie_3(value)}
+						onRoll={(value) => {
+							setBDie_3(value)
+						}}
 						size={95}
 						// cheatValue={2}
 						ref={ref3}
