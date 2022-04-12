@@ -168,12 +168,9 @@ const Round = () => {
 	const bScoreRef = useRef(bScore);
 
 	const handleBankerDiceStart = () => {
-
 		console.log("testing case: " + bScoreRef.current)
-
 		if (bScoreRef.current === null || bScoreRef.current === -1 || bScoreRef.current === 0) {
 			intervalID.current = setInterval(() => {
-
 				if (bScoreRef.current !== null && bScoreRef.current !== -1 && bScoreRef.current !== 0) {
 					console.log("stop dice case: " + bScoreRef.current)
 					clearInterval(intervalID.current);
@@ -190,15 +187,10 @@ const Round = () => {
 		}
 	}
 
-	const handleBankerDiceStop = useCallback(() => {
-		console.log("stop dice case: " + bScoreRef.current)
-		clearInterval(intervalID.current);
-	}, [])
-
-
-	// useEffect(() => {
-	// 	bScoreRef.current = bScore;
-	// }, [bScore]);
+	// logic for banker score ref
+	useEffect(() => {
+		bScoreRef.current = bScore;
+	}, [bScore]);
 
 	useEffect(() => {
 		if (bScore === 10) {
@@ -210,7 +202,7 @@ const Round = () => {
 		gameResult(bScore, pScore);
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
-		bScoreRef.current = bScore;
+		// bScoreRef.current = bScore;
 		console.log("useEffect current score on render: " + bScore);
 
 
@@ -221,10 +213,6 @@ const Round = () => {
 			<div className={styles.alphaButtons}>
 				<button
 					onClick={handleBankerDiceStart}>
-					2. Roll Banker
-				</button>
-				<button
-					onClick={handleBankerDiceStop}>
 					2. Roll Banker
 				</button>
 				{/* button to clear dice value */}
