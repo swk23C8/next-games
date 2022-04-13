@@ -2,6 +2,7 @@
 // history with table
 
 import { useEffect, useState, useReducer, useCallback, Component, useRef, useMemo } from 'react';
+import Image from 'next/image'
 import Dice from "react-dice-roll";
 import styles from './Round.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -481,9 +482,23 @@ const Round = () => {
 					<tbody>
 						<tr>
 							<td>Triple</td>
-							<td>all dice with same roll</td>
+							<td>
+								<Image
+									src="/public/assets/images/Die_face_6b.svg"
+									alt="Picture of the author"
+									// layout='fill'
+									width={11}
+									height={11}
+								/>
+							</td>
 							<td>WIN</td>
-							<td>All three dice show the same number. Triple 6-6-6 is the highest roll, triple 5-5-5 is the next highest, etc. Any triple is considered an instant win.</td>
+							<td rowSpan={1} colSpan={1}>All three dice show the same number. Triple 6-6-6 is the highest roll, triple 5-5-5 is the next highest, etc. Any triple is considered an instant win.</td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
 						</tr>
 						<tr>
 							<td>4-5-6</td>
@@ -492,16 +507,34 @@ const Round = () => {
 							<td>Sequential 4-5-6; this is considered an instant win.</td>
 						</tr>
 						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
 							<td rowSpan={1} colSpan={1}>Points</td>
 							<td>some double and a roll except 1 and 6</td>
 							<td>n points</td>
 							<td>One pair plus any other value; the odd die is the point value. For example, either 2-2-5 or 1-1-5 would give a point value of 5, and either would outscore a roll of 3-3-4 (point value of 4), which would in turn outscore a roll of 5-5-2 (point value of 2). Possible point values range from 2 to 5, since point values of 6 and 1 are special cases. When the point value is 6, this is considered an instant win; conversely, when the point value is 1, this is considered an instant loss.</td>
 						</tr>
 						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
 							<td>1-2-3</td>
 							<td>1-2-3 rolls</td>
 							<td>LOSE</td>
 							<td>Sequential 1-2-3; this is considered an instant loss.</td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
 						</tr>
 						<tr>
 							<td>Indeterminate</td>
