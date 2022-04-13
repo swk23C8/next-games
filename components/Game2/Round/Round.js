@@ -67,8 +67,8 @@ const Round = () => {
 	const [bDie_2, setBDie_2] = useState(null);
 	const [bDie_3, setBDie_3] = useState(null);
 	const [bScore, setBScore] = useState(null);
-	const [bRoll, setBRoll] = useState(false);
-	const [bDice, setBDice] = useState([null, null, null]);
+	// const [bRoll, setBRoll] = useState(false);
+	// const [bDice, setBDice] = useState([null, null, null]);
 
 	// Player useStates
 	const [pDie_1, setPDie_1] = useState(null);
@@ -89,7 +89,7 @@ const Round = () => {
 	// testing react-toastify
 	const notify = () => toast(result);
 
-	const submitBet = async (event) => {
+	const submitBet1 = async (event) => {
 		event.preventDefault();
 		const bet = event.target.bet.value;
 		const res = await fetch('/api/makeBet', {
@@ -102,8 +102,18 @@ const Round = () => {
 			method: 'POST',
 		});
 		const result = await res.json();
-		setPBet(bet);
+		setPBet(result.bet);
+		console.log(`You bet: ${result.bet}`);
+		console.log(result.bet);
+		handleBankerDiceStart();
 	};
+
+
+	const submitBet2 = (event) => {
+		const bet = event.target.bet.value;
+		console.log("bet: ", bet);
+	}
+
 
 	const score = (dice) => {
 		dice.sort();
@@ -141,6 +151,8 @@ const Round = () => {
 
 	// game result finder
 	const gameResult = () => {
+		console.log(pMoney);
+		console.log(pBet);
 		if (bScoreRef.current === 10) {
 			setResult("BANKER WINS");
 			return "BANKER WINS";
@@ -180,6 +192,7 @@ const Round = () => {
 	const pRef3 = useRef();
 	const pIntervalID = useRef();
 	const pScoreRef = useRef(pScore);
+	// const pMoneyRef = useRef(pMoney);
 
 
 	const handleBankerDiceStart = () => {
@@ -198,7 +211,7 @@ const Round = () => {
 				bRef1.current.rollDice();
 				bRef2.current.rollDice();
 				bRef3.current.rollDice();
-			}, 3000);
+			}, 2000);
 		}
 		else {
 			console.log("dice not rolling as condition is false")
@@ -216,7 +229,7 @@ const Round = () => {
 				pRef1.current.rollDice();
 				pRef2.current.rollDice();
 				pRef3.current.rollDice();
-			}, 3000);
+			}, 2000);
 		}
 		else {
 			console.log("dice not rolling as condition is false")
@@ -233,6 +246,11 @@ const Round = () => {
 		pScoreRef.current = pScore;
 	}, [pScore]);
 
+	// // logic for player money ref
+	// useEffect(() => {
+	// 	pMoneyRef.current = pMoneyRef;
+	// }, [pMoney]);
+
 	useEffect(() => {
 		if (bScore === 10) {
 			setResult("BANKER WINS");
@@ -240,7 +258,7 @@ const Round = () => {
 			setPDie_2(2);
 			setPDie_3(3);
 		}
-		// gameResult(bScore, pScore);
+
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		// bScoreRef.current = bScore;
@@ -254,7 +272,7 @@ const Round = () => {
 			<div className={styles.alphaButtons}>
 				<button
 					onClick={handleBankerDiceStart}
-					// disabled={}
+				// disabled={}
 				>
 					2. Roll Banker
 				</button>
@@ -336,6 +354,7 @@ const Round = () => {
 					<Dice
 						onRoll={(value) => {
 							setBDie_1(value);
+
 						}}
 						size={95}
 						cheatValue={1}
@@ -372,7 +391,10 @@ const Round = () => {
 				<h2 className={styles.Puser}>Player</h2>
 				<div className={styles.Pdie1}>
 					<Dice
-						onRoll={(value) => setPDie_1(value)}
+						onRoll={(value) => {
+							setPDie_1(value)
+							gameResult(bScore, pScore);
+						}}
 						size={95}
 						ref={pRef1}
 						cheatValue={1}
@@ -380,7 +402,10 @@ const Round = () => {
 				</div>
 				<div className={styles.Pdie2}>
 					<Dice
-						onRoll={(value) => setPDie_2(value)}
+						onRoll={(value) => {
+							setPDie_2(value)
+							gameResult(bScore, pScore);
+						}}
 						size={95}
 						ref={pRef2}
 						cheatValue={1}
@@ -388,7 +413,10 @@ const Round = () => {
 				</div>
 				<div className={styles.Pdie3}>
 					<Dice
-						onRoll={(value) => setPDie_3(value)}
+						onRoll={(value) => {
+							setPDie_3(value)
+							gameResult(bScore, pScore);
+						}}
 						size={95}
 						ref={pRef3}
 						cheatValue={3}
@@ -410,7 +438,7 @@ const Round = () => {
 				{/* <h2>Banker Money: ${bMoney}</h2> */}
 				<h2>Username</h2>
 				<h2>Tokens: {pMoney}</h2>
-				<form onSubmit={submitBet} className={styles.makeBet}>
+				<form onSubmit={submitBet1} className={styles.makeBet}>
 					<label>
 						Bet:
 						<input type="number" name="bet" />
