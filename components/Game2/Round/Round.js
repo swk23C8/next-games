@@ -469,6 +469,51 @@ const Round = () => {
 				<p className={styles.hotkeys}>D: roll dice</p>
 			</div>
 
+			<div className={styles.guideEl}>
+
+				<table>
+					<thead>
+						<th>Name</th>
+						<th>Example</th>
+						<th>Outcome</th>
+						<th>Comment</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Triple</td>
+							<td>all dice with same roll</td>
+							<td>WIN</td>
+							<td>All three dice show the same number. Triple 6-6-6 is the highest roll, triple 5-5-5 is the next highest, etc. Any triple is considered an instant win.</td>
+						</tr>
+						<tr>
+							<td>4-5-6</td>
+							<td>4-5-6 rolls</td>
+							<td>WIN</td>
+							<td>Sequential 4-5-6; this is considered an instant win.</td>
+						</tr>
+						<tr>
+							<td rowSpan={1} colSpan={1}>Points</td>
+							<td>some double and a roll except 1 and 6</td>
+							<td>n points</td>
+							<td>One pair plus any other value; the odd die is the point value. For example, either 2-2-5 or 1-1-5 would give a point value of 5, and either would outscore a roll of 3-3-4 (point value of 4), which would in turn outscore a roll of 5-5-2 (point value of 2). Possible point values range from 2 to 5, since point values of 6 and 1 are special cases. When the point value is 6, this is considered an instant win; conversely, when the point value is 1, this is considered an instant loss.</td>
+						</tr>
+						<tr>
+							<td>1-2-3</td>
+							<td>1-2-3 rolls</td>
+							<td>LOSE</td>
+							<td>Sequential 1-2-3; this is considered an instant loss.</td>
+						</tr>
+						<tr>
+							<td>Indeterminate</td>
+							<td>some rolls</td>
+							<td>Re-roll</td>
+							<td>Any combination that does not result in a triple, sequential (4-5-6 win or 1-2-3 loss), or points (pair + value) is considered an indeterminate outcome and requires a re-roll.</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
 
 			<div className={styles.logEl}>
 				{/* display game log
