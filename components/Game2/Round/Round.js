@@ -508,12 +508,7 @@ const Round = () => {
 							<td>WIN</td>
 							<td rowSpan={1} colSpan={1}>All three dice show the same number.<br />Triple 6-6-6 is the highest roll, triple 5-5-5 is the next highest, etc.<br />Any triple is considered an instant win.</td>
 						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
+
 						<tr>
 							<td>4-5-6</td>
 							<td>
@@ -542,12 +537,7 @@ const Round = () => {
 							<td>WIN</td>
 							<td>Sequential 4-5-6; this is considered an instant win.</td>
 						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
+
 						<tr>
 							<td rowSpan={1} colSpan={1}>Points</td>
 							<td>
@@ -576,12 +566,7 @@ const Round = () => {
 							<td>n points</td>
 							<td>One pair plus any other value; the odd die is the point value.<br />Possible point values range from 2 to 5, since point values of 6 and 1 are special cases.<br />When the point value is 6, this is considered an instant win; conversely, when the point value is 1, this is considered an instant loss.</td>
 						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
+
 						<tr>
 							<td>1-2-3</td>
 							<td>
@@ -610,12 +595,7 @@ const Round = () => {
 							<td>LOSE</td>
 							<td>Sequential 1-2-3; this is considered an instant loss.</td>
 						</tr>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
+
 						<tr>
 							<td>Indeterminate</td>
 							<td>
