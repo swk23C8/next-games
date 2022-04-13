@@ -108,27 +108,27 @@ const Round = () => {
 	const score = (dice) => {
 		dice.sort();
 		if (dice[0] === null || dice[1] === null || dice[2] === null) {
-			return -1;
+			return -2;
 		}
 		if (dice[0] === dice[1] && dice[1] === dice[2]) return 10;
 		if (dice.join() === "4,5,6") return 10;
-		if (dice.join() === "1,2,3") return -2;
+		if (dice.join() === "1,2,3") return -1;
 		if (dice[0] !== dice[1] && dice[1] !== dice[2] && dice[1] !== dice[3]) return 0;
 		if (dice[0] === dice[1] || dice[1] === dice[2] || dice[1] === dice[3]) {
 			const pointDie = dice[0] === dice[1] ? dice[2] : dice[0];
-			return pointDie === 1 ? -2 : pointDie === 6 ? 10 : pointDie;
+			return pointDie === 1 ? -1 : pointDie === 6 ? 10 : pointDie;
 		}
 	}
 
 	const pointChecker = (score, currentPlayer) => {
 		// check if die values are null
-		if (score === -1) {
+		if (score === -2) {
 			return "Roll " + currentPlayer + "'s dice";
 		}
 		if (score === 10) {
 			return "INSTANT WIN";
 		}
-		if (score === -2) {
+		if (score === -1) {
 			return "INSTANT LOSS";
 		}
 		if (score === 0) {
@@ -140,46 +140,82 @@ const Round = () => {
 	}
 
 	// game result finder
-	const gameResult = (bankerScore, playerScore) => {
-		if (playerScore === -1) {
+	const gameResult = () => {
+		if (bScoreRef.current === 10) {
+			setResult("BANKER WINS");
+			return "BANKER WINS";
+		}
+		if (pScoreRef.current === 10) {
+			setResult("PLAYER WINS");
+			return "PLAYER WINS";
+		}
+		if (pScoreRef.current === -2) {
 			setResult("Please roll your dice!");
-			return "Roll player's dice";
+			return "Please roll your dice!";
 		}
-		if (bankerScore === playerScore) {
+		if (bScoreRef.current === pScoreRef.current) {
 			setResult("PUSH");
-			return "TIE";
+			return "PUSH";
 		}
-		if (bankerScore > playerScore) {
+		if (bScoreRef.current > pScoreRef.current) {
 			setResult("BANKER WINS");
 			setPMoney(pMoney - pBet);
 			return "BANKER WINS";
 		}
-		if (bankerScore < playerScore) {
+		if (bScoreRef.current < pScoreRef.current) {
 			setResult("PLAYER WINS");
 			setPMoney(pMoney + pBet);
 			return "PLAYER WINS";
 		}
 	}
 
-	const ref1 = useRef();
-	const ref2 = useRef();
-	const ref3 = useRef();
-	const intervalID = useRef();
+	const bRef1 = useRef();
+	const bRef2 = useRef();
+	const bRef3 = useRef();
+	const bIntervalID = useRef();
 	const bScoreRef = useRef(bScore);
+
+	const pRef1 = useRef();
+	const pRef2 = useRef();
+	const pRef3 = useRef();
+	const pIntervalID = useRef();
+	const pScoreRef = useRef(pScore);
+
 
 	const handleBankerDiceStart = () => {
 		console.log("testing case: " + bScoreRef.current)
-		if (bScoreRef.current === null || bScoreRef.current === -1 || bScoreRef.current === 0) {
-			intervalID.current = setInterval(() => {
-				if (bScoreRef.current !== null && bScoreRef.current !== -1 && bScoreRef.current !== 0) {
+		if (bScoreRef.current === null || bScoreRef.current === -2 || bScoreRef.current === 0) {
+			bIntervalID.current = setInterval(() => {
+				if (bScoreRef.current !== null && bScoreRef.current !== -2 && bScoreRef.current !== 0) {
 					console.log("stop dice case: " + bScoreRef.current)
-					clearInterval(intervalID.current);
+					console.log("current banker: " + bScoreRef.current)
+					console.log("current player: " + pScoreRef.current)
+					gameResult(bScore.current, pScore.current);
+					clearInterval(bIntervalID.current);
 					return;
 				}
 				console.log("roll dice case: " + bScoreRef.current)
-				ref1.current.rollDice();
-				ref2.current.rollDice();
-				ref3.current.rollDice();
+				bRef1.current.rollDice();
+				bRef2.current.rollDice();
+				bRef3.current.rollDice();
+			}, 3000);
+		}
+		else {
+			console.log("dice not rolling as condition is false")
+		}
+	}
+
+	const handlePlayerDiceStart = () => {
+		if (pScoreRef.current === null || pScoreRef.current === -2 || pScoreRef.current === 0) {
+			pIntervalID.current = setInterval(() => {
+				if (pScoreRef.current !== null && pScoreRef.current !== -2 && pScoreRef.current !== 0) {
+					gameResult(bScore.current, pScore.current);
+					clearInterval(pIntervalID.current);
+					return;
+				}
+				pRef1.current.rollDice();
+				pRef2.current.rollDice();
+				pRef3.current.rollDice();
 			}, 3000);
 		}
 		else {
@@ -192,6 +228,11 @@ const Round = () => {
 		bScoreRef.current = bScore;
 	}, [bScore]);
 
+	// logic for player score ref
+	useEffect(() => {
+		pScoreRef.current = pScore;
+	}, [pScore]);
+
 	useEffect(() => {
 		if (bScore === 10) {
 			setResult("BANKER WINS");
@@ -199,21 +240,27 @@ const Round = () => {
 			setPDie_2(2);
 			setPDie_3(3);
 		}
-		gameResult(bScore, pScore);
+		// gameResult(bScore, pScore);
 		setBScore(score([bDie_1, bDie_2, bDie_3]))
 		setPScore(score([pDie_1, pDie_2, pDie_3]))
 		// bScoreRef.current = bScore;
-		console.log("useEffect current score on render: " + bScore);
+		console.log("useEffect current bScore on render: " + bScore);
+		console.log("useEffect current pScore on render: " + pScore);
 
-
-	}, [bDie_1, bDie_2, bDie_3, bScore, gameResult, pDie_1, pDie_2, pDie_3, pScore]);
+	}, [bDie_1, bDie_2, bDie_3, bScore, pDie_1, pDie_2, pDie_3, pScore]);
 
 	return (
 		<div className={styles.round}>
 			<div className={styles.alphaButtons}>
 				<button
-					onClick={handleBankerDiceStart}>
+					onClick={handleBankerDiceStart}
+					// disabled={}
+				>
 					2. Roll Banker
+				</button>
+				<button
+					onClick={handlePlayerDiceStart}>
+					3. Roll Player
 				</button>
 				{/* button to clear dice value */}
 				<button
@@ -291,8 +338,8 @@ const Round = () => {
 							setBDie_1(value);
 						}}
 						size={95}
-						// cheatValue={1}
-						ref={ref1}
+						cheatValue={1}
+						ref={bRef1}
 						// disabled={bDie_1 !== null} />
 						disabled={true} />
 				</div>
@@ -302,8 +349,8 @@ const Round = () => {
 							setBDie_2(value)
 						}}
 						size={95}
-						// cheatValue={1}
-						ref={ref2}
+						cheatValue={1}
+						ref={bRef2}
 						// disabled={bDie_2 !== null} />
 						disabled={true} />
 				</div>
@@ -313,32 +360,38 @@ const Round = () => {
 							setBDie_3(value)
 						}}
 						size={95}
-						// cheatValue={2}
-						ref={ref3}
+						cheatValue={2}
+						ref={bRef3}
 						// disabled={bDie_3 !== null} />
 						disabled={true} />
 				</div>
 				{/* {console.log("banker dice:", bDie_1, bDie_2, bDie_3)}
 				{console.log("score:", bScore)} */}
-				<h3 className={styles.Bresult}>{bScore === -1 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
+				<h3 className={styles.Bresult}>{bScore === -2 ? "Roll Banker's dice" : pointChecker(bScore, "Banker")}</h3>
 
 				<h2 className={styles.Puser}>Player</h2>
 				<div className={styles.Pdie1}>
 					<Dice
 						onRoll={(value) => setPDie_1(value)}
 						size={95}
+						ref={pRef1}
+						cheatValue={1}
 						disabled={pDie_1 !== null || pBet <= 0} />
 				</div>
 				<div className={styles.Pdie2}>
 					<Dice
 						onRoll={(value) => setPDie_2(value)}
 						size={95}
+						ref={pRef2}
+						cheatValue={1}
 						disabled={pDie_2 !== null || pBet <= 0} />
 				</div>
 				<div className={styles.Pdie3}>
 					<Dice
 						onRoll={(value) => setPDie_3(value)}
 						size={95}
+						ref={pRef3}
+						cheatValue={3}
 						disabled={pDie_3 !== null || pBet <= 0} />
 				</div>
 				{/* {console.log("player dice:", pDie_1, pDie_2, pDie_3)}
