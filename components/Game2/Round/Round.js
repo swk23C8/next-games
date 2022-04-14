@@ -103,7 +103,7 @@ const Round = () => {
 			method: 'POST',
 		});
 		const result = await res.json();
-		setPBet(result.bet);
+		setPBet(Number(result.bet));
 		console.log(`You bet: ${result.bet}`);
 		console.log(result.bet);
 		handleBankerDiceStart();
@@ -172,12 +172,17 @@ const Round = () => {
 		}
 		if (bScoreRef.current > pScoreRef.current) {
 			setResult("BANKER WINS");
-			setPMoney(pMoney - pBet);
+			console.log(pMoney-pBet);
+			
+			setPMoney(currentMoney => currentMoney - pBet);
 			return "BANKER WINS";
 		}
 		if (bScoreRef.current < pScoreRef.current) {
 			setResult("PLAYER WINS");
-			setPMoney(pMoney + pBet);
+			console.log(pMoney+pBet);
+			console.log(typeof pMoney);
+			console.log(typeof pBet);
+			setPMoney(currentMoney => currentMoney + pBet);
 			return "PLAYER WINS";
 		}
 	}
@@ -200,10 +205,12 @@ const Round = () => {
 		console.log("testing case: " + bScoreRef.current)
 		if (bScoreRef.current === null || bScoreRef.current === -2 || bScoreRef.current === 0) {
 			bIntervalID.current = setInterval(() => {
+				// setBScore(score([bDie_1, bDie_2, bDie_3]))
 				if (bScoreRef.current !== null && bScoreRef.current !== -2 && bScoreRef.current !== 0) {
 					console.log("stop dice case: " + bScoreRef.current)
 					console.log("current banker: " + bScoreRef.current)
 					console.log("current player: " + pScoreRef.current)
+					// setBScore(score([bDie_1, bDie_2, bDie_3]))
 					gameResult(bScore.current, pScore.current);
 					clearInterval(bIntervalID.current);
 					return;
@@ -212,6 +219,7 @@ const Round = () => {
 				bRef1.current.rollDice();
 				bRef2.current.rollDice();
 				bRef3.current.rollDice();
+				
 			}, 2000);
 		}
 		else {
@@ -223,6 +231,7 @@ const Round = () => {
 		if (pScoreRef.current === null || pScoreRef.current === -2 || pScoreRef.current === 0) {
 			pIntervalID.current = setInterval(() => {
 				if (pScoreRef.current !== null && pScoreRef.current !== -2 && pScoreRef.current !== 0) {
+					setPScore(score([pDie_1, pDie_2, pDie_3]))
 					gameResult(bScore.current, pScore.current);
 					clearInterval(pIntervalID.current);
 					return;
