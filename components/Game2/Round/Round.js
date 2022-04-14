@@ -487,26 +487,26 @@ const Round = () => {
 									src="https://cdn-icons-png.flaticon.com/512/142/142306.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142306.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142306.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 							</td>
 							<td>WIN</td>
-							<td rowSpan={1} colSpan={1}>All three dice show the same number.<br />Triple 6-6-6 is the highest roll, triple 5-5-5 is the next highest, etc.<br />Any triple is considered an instant win.</td>
+							<td rowSpan={1} colSpan={1}>All three dice show the same number.<br /> 6-6-6 is the highest roll,<br />5-5-5 is the next highest, etc.<br />Any triple is an instant win.</td>
 						</tr>
 
 						<tr>
@@ -516,26 +516,26 @@ const Round = () => {
 									src="https://cdn-icons-png.flaticon.com/512/142/142304.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142305.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142306.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 							</td>
 							<td>WIN</td>
-							<td>Sequential 4-5-6; this is considered an instant win.</td>
+							<td>Sequential 4-5-6;<br /> this is an instant win.</td>
 						</tr>
 
 						<tr>
@@ -545,26 +545,26 @@ const Round = () => {
 									src="https://cdn-icons-png.flaticon.com/512/142/142304.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142304.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142305.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 							</td>
 							<td>n points</td>
-							<td>One pair plus any other value; the odd die is the point value.<br />Possible point values range from 2 to 5, since point values of 6 and 1 are special cases.<br />When the point value is 6, this is considered an instant win; conversely, when the point value is 1, this is considered an instant loss.</td>
+							<td>One pair plus any other value; the odd die is the point value. Possible point values range from 2 to 5<br />When the point value is 6, it is an instant win; When the point value is 1, it is an instant loss.</td>
 						</tr>
 
 						<tr>
@@ -574,26 +574,26 @@ const Round = () => {
 									src="https://cdn-icons-png.flaticon.com/512/142/142301.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142302.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142303.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 							</td>
 							<td>LOSE</td>
-							<td>Sequential 1-2-3; this is considered an instant loss.</td>
+							<td>Sequential 1-2-3;<br /> this is an instant loss.</td>
 						</tr>
 
 						<tr>
@@ -603,26 +603,26 @@ const Round = () => {
 									src="https://cdn-icons-png.flaticon.com/512/142/142303.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142305.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 								<Image
 									src="https://cdn-icons-png.flaticon.com/512/142/142306.png"
 									alt="Die_face_6b"
 									// layout='fill'
-									width={33}
-									height={33}
+									width={35}
+									height={35}
 								/>
 							</td>
 							<td>Re-roll</td>
-							<td>Any combination that does not result in a triple, sequential (4-5-6 win or 1-2-3 loss), or points (pair + value) is considered an indeterminate outcome and requires a re-roll.</td>
+							<td>Any combination that does not result in a triple, sequential, or points is an indeterminate outcome and requires a re-roll.</td>
 						</tr>
 					</tbody>
 				</table>
