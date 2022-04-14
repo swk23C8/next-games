@@ -150,6 +150,25 @@ const Round = () => {
 
 	}
 
+	// reset round after round is finished
+	const resetRound = () => {
+		setBDie_1(null);
+		setBDie_2(null);
+		setBDie_3(null);
+		setBScore(null);
+		setPDie_1(null);
+		setPDie_2(null);
+		setPDie_3(null);
+		setPScore(null);
+		setPRoll(false);
+		// setPMoney(1000);
+		setPBet(0);
+		setResult(null);
+		setIsRoundStarted(true);
+		setRoundCount(roundCount + 1);
+		setShowRoundStatistic(false);
+	}
+
 	// game result finder
 	const gameResult = () => {
 		console.log(pMoney);
@@ -158,32 +177,36 @@ const Round = () => {
 			setResult("BANKER WINS");
 			return "BANKER WINS";
 		}
-		if (pScoreRef.current === 10) {
+		else if (pScoreRef.current === 10) {
 			setResult("PLAYER WINS");
 			return "PLAYER WINS";
 		}
-		if (pScoreRef.current === -2) {
+		else if (pScoreRef.current === -2) {
 			setResult("Please roll your dice!");
 			return "Please roll your dice!";
 		}
-		if (bScoreRef.current === pScoreRef.current) {
+		else if (bScoreRef.current === pScoreRef.current) {
 			setResult("PUSH");
 			return "PUSH";
 		}
-		if (bScoreRef.current > pScoreRef.current) {
+		else if (bScoreRef.current > pScoreRef.current) {
 			setResult("BANKER WINS");
-			console.log(pMoney-pBet);
-			
+			console.log(pMoney - pBet);
+
 			setPMoney(currentMoney => currentMoney - pBet);
 			return "BANKER WINS";
 		}
-		if (bScoreRef.current < pScoreRef.current) {
+		else if (bScoreRef.current < pScoreRef.current) {
 			setResult("PLAYER WINS");
-			console.log(pMoney+pBet);
+			console.log(pMoney + pBet);
 			console.log(typeof pMoney);
 			console.log(typeof pBet);
 			setPMoney(currentMoney => currentMoney + pBet);
 			return "PLAYER WINS";
+		}
+		else {
+			setResult("Please place a bet!");
+			return "Please place a bet!";
 		}
 	}
 
@@ -219,7 +242,7 @@ const Round = () => {
 				bRef1.current.rollDice();
 				bRef2.current.rollDice();
 				bRef3.current.rollDice();
-				
+
 			}, 2000);
 		}
 		else {
@@ -234,6 +257,7 @@ const Round = () => {
 					setPScore(score([pDie_1, pDie_2, pDie_3]))
 					gameResult(bScore.current, pScore.current);
 					clearInterval(pIntervalID.current);
+					resetRound();
 					return;
 				}
 				pRef1.current.rollDice();
@@ -470,7 +494,9 @@ const Round = () => {
 				/>
 
 				{/* display game result */}
-				<h2 className={styles.gameResult}>Game Result: {result}</h2>
+				{console.log(result)}
+				<h2 className={styles.gameResult}>Game Result: {result ? result : "Please place a bet!"}</h2>
+
 
 				<h1 className={styles.hotkeysTitle}>Hotkeys</h1>
 				<p className={styles.hotkeys}>SPACE: bet</p>
