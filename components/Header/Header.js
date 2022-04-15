@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { signOut, useSession } from 'next-auth/react';
+
 import Container from '../Container/Container';
 import styles from './Header.module.scss';
 
