@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
+import prisma from '../../lib/prisma';
 
 import Container from '../Container/Container';
 import styles from './Header.module.scss';
@@ -13,6 +14,8 @@ const Header = () => {
 
   if (session) {
     console.log(session);
+    console.log(status);
+    console.log(loading);
   }
 
   const { pathname } = useRouter();
@@ -104,7 +107,7 @@ const Header = () => {
                         signOut()
                       }}
                     >
-                      Sign out
+                      {" "} Sign out
                     </a>
                   </>
                 )}

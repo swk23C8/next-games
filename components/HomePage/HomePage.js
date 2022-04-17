@@ -30,10 +30,13 @@ const HomePage = () => {
             >
               Click Here To Play!
             </button>
+            <button onClick={() => fetch('/api/posts', { method: 'POST' })}>
+              get session
+            </button>
           </div>
         </Paper>
       </section>
-    </div>
+    </div >
   );
 };
 
